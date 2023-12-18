@@ -9,7 +9,7 @@
         <div class="top-container" (click)="overlay = true; selectedMeeting = reschedule">
             <h2 class="date">{{ reschedule.date | date:'EE dd.MM  HH:mm'}}</h2>
         </div>
-        <hr>
+        <hr [ngClass]="reschedule.state">
         <div class="btm-container">
             <div class="mbr-container">
                 <span *ngFor="let member of reschedule.members" [ngClass]="member.status">{{ member.name }}</span>

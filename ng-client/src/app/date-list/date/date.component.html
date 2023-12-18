@@ -25,7 +25,7 @@
         <h2 class="date">{{ meeting.date | date:'EE dd.MM  HH:mm'}}</h2>
 
     </div>
-    <hr>
+    <hr [ngClass]="meeting.state">
     <div class="btm-container">
         <div class="mbr-container">
             <span *ngFor="let member of meeting.members" [ngClass]="member.status">{{ member.name }}</span>
