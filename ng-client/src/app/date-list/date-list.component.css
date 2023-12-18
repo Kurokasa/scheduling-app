@@ -1,0 +1,7 @@
+.container-list{
+    display: flex;
+    flex-direction: column;
+}
+.meeting{
+    margin-bottom: 2vw;
+}

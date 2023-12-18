@@ -1,0 +1,27 @@
+.container{
+    height: 100%;
+    background-color: #444444;
+    display: flex;
+    justify-content: space-evenly;
+}
+.wrapper{
+    height: 100%;
+    width: 25vw;
+    display: flex;
+    align-items: center; /* items fallen immer weiter nach unten mit wachsender breite */
+    justify-content: center;
+
+    border-top: solid;
+    border-width: 1px;
+    border-color: var(--main-acc-grey);
+}
+span{
+    font-size: 6vw;
+    color: var(--main-acc-grey);
+}
+.active{
+    background-color: var(--main-acc-grey);
+}
+.active span{
+    color: #444444;
+}

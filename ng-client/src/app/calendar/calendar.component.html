@@ -1,0 +1,10 @@
+<div class="container">
+  <p-calendar [(ngModel)]="date" [numberOfMonths]="2" class="mycal" [inline]="true" (onMonthChange)="monthChanged($event)" (onSelect)="selected()">
+      <ng-template pTemplate="date" let-date>
+          <div [ngClass]="isInDates(date.day, date.month, date.year)" style="display: flex; width: 100%; height: 100%; justify-content: center; align-items: center;">
+            <span style="text-align: center;">{{date.day}}</span>
+          </div>
+      </ng-template>
+  </p-calendar>
+</div>
+<!-- [ngStyle]="{backgroundColor: (date.day < 21 && date.day > 10) ? '#7cc67c' : 'inherit'}" -->

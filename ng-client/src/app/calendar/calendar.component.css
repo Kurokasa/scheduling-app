@@ -1,0 +1,19 @@
+.container{
+    height: 100%;
+    max-height: 92vh;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+
+    justify-content: center;
+}
+.waiting{
+    border-color: var(--waiting-brd-color) !important;
+    border: 1.5px solid;
+    border-radius: 100%;
+}
+.accepted{
+    border-color: var(--accepted-brd-color) !important;
+    border: 1.5px solid;
+    border-radius: 100%;
+}

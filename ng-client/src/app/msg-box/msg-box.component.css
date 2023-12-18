@@ -1,0 +1,49 @@
+.container{
+    width: 100%;
+    height: 100%;
+
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: rgba(100, 100, 100, 0.5);
+}
+.msgBody{
+    min-height: 30vw;
+    max-height: 80vh;
+    width: 80vw;
+
+    display: flex;
+    flex-direction: column;
+
+    border: solid;
+    border-width: 0.5vw;
+    border-radius: 2vw;
+    border-color: var(--waiting-brd-color);
+    background-color: var(--waiting-bg-color);
+
+    padding: 2.5vw;
+}
+h2{
+    color: var(--main-font-color);
+    margin: 0;
+    font-size: 6vw;
+    font-family: 'Advent Pro', sans-serif;
+    font-weight: 700;
+}
+p{
+    color: var(--main-font-color);
+    margin: 1vw 0;
+    font-size: 4vw;
+    font-family: 'Advent Pro', sans-serif;
+    font-weight: 500;
+}
+.btns{
+    width: 100%;
+    margin-top: 2vw;
+    display: flex;
+    justify-content: space-evenly;
+}

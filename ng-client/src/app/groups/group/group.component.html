@@ -1,0 +1,11 @@
+<div class="container" [routerLink]="['/group/',group.name]">
+    <div class="container-img">
+        <img *ngIf="group.imgLink" [src]="group.imgLink">
+    </div>
+    <div class="container-rgt">
+        <h2>{{ group.name }}</h2>
+        <div class="mbr-container">
+            <span *ngFor="let member of group.members" [class]="member.status">{{ member.name }}</span>
+        </div>
+    </div>
+</div>

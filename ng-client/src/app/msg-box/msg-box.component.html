@@ -1,0 +1,10 @@
+<div class="container">
+    <div class="msgBody">
+        <h2>{{ headline }}</h2>
+        <p>{{ msg }}</p>
+        <div class="btns">
+            <p-button label="Cancle" [outlined]="true" severity="danger" (click)="resolve(false)"></p-button>
+            <p-button label="Accept" [outlined]="true" severity="success" (click)="resolve(true)"></p-button>
+        </div>
+    </div>
+</div>

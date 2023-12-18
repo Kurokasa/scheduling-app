@@ -1,0 +1,7 @@
+<div class="container-list">
+    <div *ngFor="let meeting of dataService.meetings">
+        <div class="meeting" *ngIf="meeting.rescheduled == false && meeting.date > today">
+            <app-date [meeting]="meeting"></app-date>
+        </div>
+    </div>
+</div>

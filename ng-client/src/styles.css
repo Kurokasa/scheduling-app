@@ -1,0 +1,55 @@
+/* You can add global styles to this file, and also import other style files */
+@import "primeicons/primeicons.css";
+@import url('https://fonts.googleapis.com/css2?family=Advent+Pro:ital,wght@0,500;0,600;0,700;0,800;0,900;1,500;1,600;1,700;1,800;1,900&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;1,100;1,200;1,300;1,400;1,500;1,600&display=swap'); */
+
+:root{
+    --main-font-color: rgb(235, 235, 235);
+    --main-acc-grey: #ced4da; /* rgb(192, 192, 192) */
+
+    --waiting-bg-color: rgb(122, 122, 122);
+    --waiting-brd-color: rgb(170, 170, 170);
+    --accepted-bg-color: rgba(203, 232, 186, 0.4);
+    --accepted-brd-color: rgb(98, 156, 68);
+    --declined-bg-color: rgb(255, 180, 176, 0.4);
+    --declined-brd-color: rgb(230, 22, 16);
+
+    --font-main: ("Inter var", sans-serif);
+
+}
+body{
+    margin: 0px;
+}
+.p-inputtext{
+    opacity: 0;
+}
+
+.p-datepicker-inline{
+    background-color: #444444;
+    width: 90vw;
+    color: var(--main-font-color);
+}
+.p-datepicker-group-container{
+    flex-direction: column;
+}
+.p-datepicker-group{
+    border: 0;
+    padding: 0;
+}
+.p-datepicker-header{
+    background-color: #444444;
+}
+.p-datepicker-year, .p-datepicker-month{
+    color: var(--main-font-color);
+}
+.p-highlight{
+    background-color: #444444 !important;
+    background: #444444 !important;
+    color: var(--main-font-color);
+}
+.p-datepicker-prev{
+    display: none !important;
+}
+.p-datepicker-next{
+    display: none !important;
+}

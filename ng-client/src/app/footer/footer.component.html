@@ -1,0 +1,14 @@
+<div class="container">
+    <div class="wrapper" [routerLink]="['/list']" routerLinkActive="active" (click)="updateMeetings()">
+        <span class="pi pi-bars"></span>
+    </div>
+    <div class="wrapper" [routerLink]="['/calendar']" routerLinkActive="active">
+        <span class="pi pi-calendar"></span>
+    </div>
+    <div class="wrapper" [routerLink]="['/groups']" routerLinkActive="active">
+        <span class="pi pi-sitemap"></span>
+    </div>
+    <div class="wrapper" [routerLink]="['/profil']" routerLinkActive="active" (click)="update()">
+        <span class="pi pi-user"></span>
+    </div>
+</div>

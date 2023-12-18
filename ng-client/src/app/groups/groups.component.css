@@ -1,0 +1,21 @@
+.container{
+    height: 89vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+div{
+    margin-bottom: 2vw;
+}
+i{
+    align-self: center;
+  
+    font-size: 5.5vw;
+    color: var(--main-acc-grey);
+
+    padding: 2vw;
+
+    border: solid;
+    border-width: 0.5vw;
+    border-radius: 100%;
+}
