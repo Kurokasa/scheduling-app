@@ -36,17 +36,18 @@ export class ReScheduleComponent implements OnInit{
       newMembers.push({id: mem.id, name: mem.name, status: 'waiting'})
 
     let newMeeting = new Meeting(null, this.meeting.grp, this.meeting.grpName, this.date, newMembers, [], false, this.meeting.id, 'waiting') //<Meeting>{id: null, grp: this.meeting.name, date: this.date, members: newMembers, reschedules: [], rescheduled: false, mainschedule: this.meeting.id, state: 'waiting'};
+    this.dataService.addMeeting(newMeeting);
     // ToDo sync data to the server
     this.meeting.reschedules.push(newMeeting);
     this.meeting.reschedules.sort((a, b) => (a.date > b.date) ? 1 : -1);
   }
   accept(meeting: Meeting){
     meeting.members[0].status = 'accepted';
-    this.dataService.updateMeeting(meeting);
+    this.dataService.acceptMeeting(meeting);
   }
   decline(meeting: Meeting){
     meeting.members[0].status = 'declined';
-    this.dataService.updateMeeting(meeting);
+    this.dataService.declineMeeting(meeting);
   }
   reschedule(event: boolean){
     if (event){
