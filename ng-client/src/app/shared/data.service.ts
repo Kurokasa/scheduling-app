@@ -1,11 +1,10 @@
-import { Injectable, resolveForwardRef } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Group } from './group.model';
 import { Meeting } from './meeting.model';
 import { Member } from './member.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { UserService } from './user.service';
-import { group } from '@angular/animations';
-import { lastValueFrom } from 'rxjs';
+import { Subscription, lastValueFrom } from 'rxjs';
 import { environment } from '../../environments/environment';
 
 interface GrpDTO {
@@ -51,42 +50,42 @@ interface MemberDTO {
 @Injectable({
   providedIn: 'root'
 })
-export class DataService {
+export class DataService{
 
   endDate = new Date();
-  //groups: Group[] = [];
+  groups: Group[] = [];
 
-  groups: Group[] = [
-    new Group('Grp1', 'Test Group1', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyHrRWjgxU8DgFOGszvioOTR_TNGZuruM0zBGHNrc-QQ&s', [{id: 'testid', name: 'Mark', status: 'waiting'}, {id: 'testid', name: 'Jessy', status: 'waiting'}],
-      [{startDate: new Date('11.01.2023 23:50'), repeate: 'weekly'}, {startDate: new Date('11.03.2023 02:00'), repeate: 'monthly'}],
-      [
-        {id: 'TestID1', grp: 'Test Group1', grpName: '', date: new Date('11.01.2023 23:50'), members: [{id: '', name: 'Mark', status: 'accepted'}, {id: '', name: 'Jessy', status: 'accepted'}, {id: '', name: 'Andreas', status: 'accepted'}], reschedules: [], rescheduled: false},
-        {id: 'TestID2', grp: 'Test Group1', grpName: '', date: new Date('11.03.2023 23:50'), members: [{id: '', name: 'Mark', status: 'accepted'}, {id: '', name: 'Jessy', status: 'waiting'}, {id: '', name: 'Andreas', status: 'accepted'}], reschedules: [], rescheduled: false},
-        {id: 'TestID3', grp: 'Test Group1', grpName: '', date: new Date('11.08.2023 23:50'), members: [{id: '', name: 'Andreas', status: 'waiting'}, {id: '', name: 'Jessy', status: 'accepted'}, {id: '', name: 'Mark', status: 'accepted'}], reschedules: [new Meeting('123', 'Test Group1','Test Group1', new Date('02.02.2023 18:00'), [{id: '', name: 'Mark', status: 'waiting'}, {id: '', name: 'Jessy', status: 'accepted'}, {id: '', name: 'Andreas', status: 'accepted'}], [], false, 'waiting') ], rescheduled: false},
-        {id: 'TestID4', grp: 'Test Group1', grpName: '', date: new Date('11.29.2023 23:50'), members: [{id: '', name: 'Jessy', status: 'accepted'}, {id: '', name: 'Mark', status: 'accepted'}, {id: '', name: 'Andreas', status: 'accepted'}], reschedules: [], rescheduled: false}
-      ]),
-    new Group('Grp2', 'Test Group2', '', [{id: 'testid', name: 'Mark', status: 'waiting'}, {id: 'testid', name: 'Jessy', status: 'waiting'}],
-      [{startDate: new Date('10.03.2023 03:00'), repeate: 'biWeekly'}],
-      [
-        {id: 'TestID5', grp: 'Test Group2', grpName: '', date: new Date('11.07.2023 19:00'), members: [{id: '', name: 'Jessy', status: 'accepted'}, {id: '', name: 'Mark', status: 'accepted'}, {id: '', name: 'Andreas', status: 'accepted'}], reschedules: [], rescheduled: false},
-        {id: 'TestID6', grp: 'Test Group2', grpName: '', date: new Date('11.21.2023 19:00'), members: [{id: '', name: 'Jessy', status: 'accepted'}, {id: '', name: 'Mark', status: 'accepted'}, {id: '', name: 'Andreas', status: 'accepted'}], reschedules: [], rescheduled: false},
-        {id: 'TestID7', grp: 'Test Group2', grpName: '', date: new Date('12.05.2023 19:00'), members: [{id: '', name: 'Jessy', status: 'accepted'}, {id: '', name: 'Mark', status: 'accepted'}, {id: '', name: 'Andreas', status: 'accepted'}], reschedules: [], rescheduled: false},
-        {id: 'TestID8', grp: 'Test Group2', grpName: '', date: new Date('12.19.2023 19:00'), members: [{id: '', name: 'Jan', status: 'declined'}, {id: '', name: 'Jessy', status: 'waiting'}, {id: '', name: 'Andreas', status: 'accepted'},{id: '', name: 'Hans', status: 'declined'}, {id: '', name: 'Jessy', status: 'waiting'}, {id: '', name: 'Mark', status: 'accepted'}], reschedules: [], rescheduled: false},
-        ])
-  ]
+  // groups: Group[] = [
+  //   new Group('Grp1', 'Test Group1', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyHrRWjgxU8DgFOGszvioOTR_TNGZuruM0zBGHNrc-QQ&s', [{id: 'testid', name: 'Mark', status: 'waiting'}, {id: 'testid', name: 'Jessy', status: 'waiting'}],
+  //     [{startDate: new Date('11.01.2023 23:50'), repeate: 'weekly'}, {startDate: new Date('11.03.2023 02:00'), repeate: 'monthly'}],
+  //     [
+  //       {id: 'TestID1', grp: 'Test Group1', grpName: '', date: new Date('11.01.2023 23:50'), members: [{id: '', name: 'Mark', status: 'accepted'}, {id: '', name: 'Jessy', status: 'accepted'}, {id: '', name: 'Andreas', status: 'accepted'}], reschedules: [], rescheduled: false},
+  //       {id: 'TestID2', grp: 'Test Group1', grpName: '', date: new Date('11.03.2023 23:50'), members: [{id: '', name: 'Mark', status: 'accepted'}, {id: '', name: 'Jessy', status: 'waiting'}, {id: '', name: 'Andreas', status: 'accepted'}], reschedules: [], rescheduled: false},
+  //       {id: 'TestID3', grp: 'Test Group1', grpName: '', date: new Date('11.08.2023 23:50'), members: [{id: '', name: 'Andreas', status: 'waiting'}, {id: '', name: 'Jessy', status: 'accepted'}, {id: '', name: 'Mark', status: 'accepted'}], reschedules: [new Meeting('123', 'Test Group1','Test Group1', new Date('02.02.2023 18:00'), [{id: '', name: 'Mark', status: 'waiting'}, {id: '', name: 'Jessy', status: 'accepted'}, {id: '', name: 'Andreas', status: 'accepted'}], [], false, 'waiting') ], rescheduled: false},
+  //       {id: 'TestID4', grp: 'Test Group1', grpName: '', date: new Date('11.29.2023 23:50'), members: [{id: '', name: 'Jessy', status: 'accepted'}, {id: '', name: 'Mark', status: 'accepted'}, {id: '', name: 'Andreas', status: 'accepted'}], reschedules: [], rescheduled: false}
+  //     ]),
+  //   new Group('Grp2', 'Test Group2', '', [{id: 'testid', name: 'Mark', status: 'waiting'}, {id: 'testid', name: 'Jessy', status: 'waiting'}],
+  //     [{startDate: new Date('10.03.2023 03:00'), repeate: 'biWeekly'}],
+  //     [
+  //       {id: 'TestID5', grp: 'Test Group2', grpName: '', date: new Date('11.07.2023 19:00'), members: [{id: '', name: 'Jessy', status: 'accepted'}, {id: '', name: 'Mark', status: 'accepted'}, {id: '', name: 'Andreas', status: 'accepted'}], reschedules: [], rescheduled: false},
+  //       {id: 'TestID6', grp: 'Test Group2', grpName: '', date: new Date('11.21.2023 19:00'), members: [{id: '', name: 'Jessy', status: 'accepted'}, {id: '', name: 'Mark', status: 'accepted'}, {id: '', name: 'Andreas', status: 'accepted'}], reschedules: [], rescheduled: false},
+  //       {id: 'TestID7', grp: 'Test Group2', grpName: '', date: new Date('12.05.2023 19:00'), members: [{id: '', name: 'Jessy', status: 'accepted'}, {id: '', name: 'Mark', status: 'accepted'}, {id: '', name: 'Andreas', status: 'accepted'}], reschedules: [], rescheduled: false},
+  //       {id: 'TestID8', grp: 'Test Group2', grpName: '', date: new Date('12.19.2023 19:00'), members: [{id: '', name: 'Jan', status: 'declined'}, {id: '', name: 'Jessy', status: 'waiting'}, {id: '', name: 'Andreas', status: 'accepted'},{id: '', name: 'Hans', status: 'declined'}, {id: '', name: 'Jessy', status: 'waiting'}, {id: '', name: 'Mark', status: 'accepted'}], reschedules: [], rescheduled: false},
+  //       ])
+  // ]
 
   loadedMeetings: Meeting[] = [];
   meetings: Meeting[] = [];
+  userSub: Subscription;
 
   constructor(private http: HttpClient, private user: UserService){
     this.endDate.setDate(new Date().getDate() + 60);
   }
 
   async update(){
-    // ToDo: pull data from server
     this.groups = [];
     this.loadedMeetings = [];
-    // ToDo: This should be done in the login component
+
     await this.http.get(environment.SERVER + '/data/user')
       .subscribe( (resp:{email: string, id: string, userName: string}) => {
         this.user.id = resp.id;
@@ -128,6 +127,7 @@ export class DataService {
       
     console.log('Loaded Meetings:');
     console.log(this.loadedMeetings)
+    this.updateMeetings();
   }
 
   updateMeetings(){

@@ -10,7 +10,7 @@ export class AuthController {
 
     @Post('signup')
     signup(@Body() createUser: CreateUser) {
-        return this.authService.signup(createUser.email, createUser.password, createUser.name)
+        return this.authService.signup(createUser.email, createUser.password, createUser.username)
             .catch( (e) => {
                 switch (e.code){
                     case 'P2002':
