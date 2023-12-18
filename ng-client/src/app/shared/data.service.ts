@@ -41,9 +41,9 @@ interface ReschedulesDTO {
   reschedule: MeetingDTO;
 }
 interface MemberDTO {
-  userID: 'c9202215-427a-458a-b956-6c7e89eb929e';
-  meetingID: '8ede0c6e-3f2d-450d-97cf-e63352d31985';
-  accepted: 'accepted';
+  userID: string;
+  meetingID: string;
+  accepted: string;
   user: UserDTO;
 }
 
@@ -259,20 +259,33 @@ export class DataService{
         return grp;
   }
 
-  addMeeting(newMeeting: Meeting){
-    for (let id in this.groups){
-      if (this.groups[id].name == newMeeting.id)
-        this.groups[id].meetings.push(newMeeting);
+  async addMeeting(newMeeting: Meeting): Promise<Meeting>{
+    let userInGroup = this.groups.find((group) => group.id === newMeeting.grp);
+    let isNewMeeting = !this.loadedMeetings.find((meeting) => meeting.date === newMeeting.date)
+    if (userInGroup && isNewMeeting){
+      return new Promise((resolve, reject) => {
+        this.http.post(environment.SERVER + '/data/newMeeting', newMeeting)
+          .subscribe({
+            next: response => {
+              console.log('addMeeting: ', response);
+              newMeeting.id = response['id'];
+              resolve(newMeeting);
+            },
+            error: error => {
+              console.error('There was an error!', error);
+              reject(error);
+            } 
+          })
+      });
     }
-    this.loadedMeetings.push(newMeeting)
-    
+    throw new Error('User is not in the group or meeting already exists');
   }
 
-  acceptMeeting(meeting: Meeting){
+  async acceptMeeting(meeting: Meeting){
     if (meeting.id){
       this.http.post(environment.SERVER + '/data/meeting/accept/' + meeting.id, null).subscribe({
         next: data => {
-          console.log(data);
+          console.log('acceptMeeting: ', data);
         },
         error: error => {
           console.error('There was an error!', error);
@@ -282,15 +295,25 @@ export class DataService{
       this.updateMeeting(meeting);
     }
     else{
-      
+      meeting = await this.addMeeting(meeting);
+      this.http.post(environment.SERVER + '/data/meeting/accept/' + meeting.id, null).subscribe({
+        next: data => {
+          console.log('acceptMeeting: ', data);
+        },
+        error: error => {
+          console.error('There was an error!', error);
+        }
+      })
+      meeting.members[0].status = 'accepted';
+      this.updateMeeting(meeting);  
     }
   }
 
-  declineMeeting(meeting: Meeting){
+  async declineMeeting(meeting: Meeting){
     if (meeting.id){
       this.http.post(environment.SERVER + '/data/meeting/decline/' + meeting.id, null).subscribe({
         next: data => {
-          console.log(data);
+          console.log('declineMeeting: ', data);
         },
         error: error => {
           console.error('There was an error!', error);
@@ -298,10 +321,19 @@ export class DataService{
       })
     }
     else{
-
+      meeting = await this.addMeeting(meeting);
+      this.http.post(environment.SERVER + '/data/meeting/decline/' + meeting.id, null).subscribe({
+        next: data => {
+          console.log('declineMeeting: ', data);
+        },
+        error: error => {
+          console.error('There was an error!', error);
+        }
+      })
     }
     meeting.members[0].status = 'declined';
     this.updateMeeting(meeting);
   }
+
 
 }

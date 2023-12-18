@@ -13,9 +13,11 @@ export class DateComponent {
   constructor(private dataService: DataService){}
 
   accept(){
+    this.meeting.members[0].status = 'accepted';
     this.dataService.acceptMeeting(this.meeting);
   }
   decline(){
+    this.meeting.members[0].status = 'declined';
     this.dataService.declineMeeting(this.meeting);
   }
   onReschedule(){
