@@ -1,0 +1,78 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+  shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
+}
+
+model User {
+  id          String    @id @unique @default(uuid())
+  userName    String
+  email       String @unique
+  password    String
+  users         Users[]
+  members  Members[]
+}
+ 
+model Users {
+  userID   String
+  groupID  String
+  isAdmin  Boolean @default(false)
+  user     User    @relation(fields: [userID], references: [id])
+  group    Group   @relation(fields: [groupID], references: [id])
+
+  @@id([userID, groupID])
+}
+ 
+model Group {
+  id        String       @id @unique @default(uuid())
+  name      String
+  imgLink   String?
+  schedules Schedules[]
+  meetings  Meeting[]
+  users       Users[]
+}
+
+model Schedules {
+  id        Int          @id @unique @default(autoincrement())
+  groupID   String
+  startDate DateTime     @default(now())
+  repeate   String       @default("none")
+
+  group     Group        @relation(fields: [groupID], references: [id])
+}
+ 
+model Members {
+  userID    String
+  meetingID String
+  accepted  String @default("waiting")
+  user      User   @relation(fields: [userID], references: [id])
+  meeting   Meeting @relation(fields: [meetingID], references: [id])
+ 
+  @@id([userID, meetingID])
+}
+ 
+model Meeting {
+  id            String         @id @unique @default(uuid())
+  date          DateTime    @default(now())
+  groupID       String?
+  group         Group?      @relation(fields: [groupID], references: [id])
+  mainschedule  Reschedules? @relation("mainschedule")
+  reschedules    Reschedules[] @relation("subschedule")
+  rescheduled   Boolean     @default(false)
+  members    Members[]
+}
+
+model Reschedules {
+  mainID      String
+  subID       String      @unique
+  main        Meeting     @relation("subschedule", fields: [mainID], references: [id])
+  reschedule  Meeting     @relation("mainschedule", fields: [subID], references: [id])
+  @@id([mainID, subID])
+}
