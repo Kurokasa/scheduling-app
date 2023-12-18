@@ -6,6 +6,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { UserService } from './user.service';
 import { group } from '@angular/animations';
 import { lastValueFrom } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 interface GrpDTO {
   id: string; 
@@ -52,8 +53,6 @@ interface MemberDTO {
 })
 export class DataService {
 
-  userName = 'Mark';
-  server = 'http://localhost:3000'
   endDate = new Date();
   //groups: Group[] = [];
 
@@ -88,13 +87,13 @@ export class DataService {
     this.groups = [];
     this.loadedMeetings = [];
     // ToDo: This should be done in the login component
-    await this.http.get(this.server + '/data/user')
+    await this.http.get(environment.SERVER + '/data/user')
       .subscribe( (resp:{email: string, id: string, userName: string}) => {
         this.user.id = resp.id;
         this.user.email = resp.email;
         this.user.username = resp.userName;
       })
-    const resp = await lastValueFrom(this.http.get<GrpDTO[]>(this.server + '/data/groups'))
+    const resp = await lastValueFrom(this.http.get<GrpDTO[]>(environment.SERVER + '/data/groups'))
         for (let grp of resp){
           let newMembers: Member[] = grp.users.map( (mem):Member => {
             return {id: mem.userID, name: mem.user.userName, status: mem.isAdmin == true? 'admin' : 'user'}
@@ -271,7 +270,7 @@ export class DataService {
 
   acceptMeeting(meeting: Meeting){
     if (meeting.id){
-      this.http.post(this.server + '/data/meeting/accept/' + meeting.id, null).subscribe({
+      this.http.post(environment.SERVER + '/data/meeting/accept/' + meeting.id, null).subscribe({
         next: data => {
           console.log(data);
         },
@@ -289,7 +288,7 @@ export class DataService {
 
   declineMeeting(meeting: Meeting){
     if (meeting.id){
-      this.http.post(this.server + '/data/meeting/decline/' + meeting.id, null).subscribe({
+      this.http.post(environment.SERVER + '/data/meeting/decline/' + meeting.id, null).subscribe({
         next: data => {
           console.log(data);
         },
