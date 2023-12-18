@@ -6,6 +6,7 @@ import { GroupsComponent } from './groups/groups.component';
 import { ProfilComponent } from './profil/profil.component';
 import { GroupEditComponent } from './groups/group-edit/group-edit.component';
 import { ReScheduleComponent } from './date-list/re-schedule/re-schedule.component';
+import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
   {path: '', component: DateListComponent},
