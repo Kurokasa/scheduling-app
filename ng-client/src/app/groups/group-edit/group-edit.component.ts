@@ -40,4 +40,10 @@ export class GroupEditComponent implements OnInit{
   leaveGroup(){
     this.dataService.leaveGroup(this.group.id);
   }
+
+  save(){
+    console.log('saving: ', this.group);
+    if (this.group.name !== '' && this.group.id)
+      this.dataService.updateGroup(this.group);
+  }
 }

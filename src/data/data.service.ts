@@ -190,6 +190,35 @@ export class DataService {
         return grp;  
     }
 
+    async updateGroup(userID: any, grp: Group){
+        console.log('updateGroup')
+        console.log(grp)
+        let group = await this.prismaService.group.findUnique({
+            where: {
+                id: grp.id
+            }
+        })
+        if(!group)
+            throw new HttpException('Group not found', HttpStatus.NOT_FOUND);
+        
+        await this.prismaService.group.update({
+            where: {
+                id: grp.id
+            },
+            data: {
+                name: grp.name,
+                imgLink: grp.imgLink
+            }
+            }).catch( (err) => {
+                switch(err.code){
+                    default:
+                        console.log('Unknown Error in updateGroup() ', err);
+                        throw new HttpException('Unknown Error in Grp update', HttpStatus.INTERNAL_SERVER_ERROR);
+                }
+            })
+        return group;
+    }
+
     async acceptMeeting(userID: any, meetingID: any){
         let meeting = await this.prismaService.meeting.findUnique({
             where: {

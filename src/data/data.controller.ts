@@ -28,6 +28,7 @@ export class DataController {
     getUser(@Request() req){
         return this.dataService.getUser(req['user'].sub)
     }
+
     @UseGuards(AuthGuard)
     @Post('join/:id')
     joinGroup(@Request() req, @Param() grp){
@@ -37,6 +38,11 @@ export class DataController {
     @Post('leave/:id')
     leaveGroup(@Request() req, @Param() grp){
         return this.dataService.leaveGroup(req['user'].sub, grp.id)
+    }
+    @UseGuards(AuthGuard)
+    @Post('updateGroup')
+    updateGroup(@Request() req, @Body() grp: Group){
+        return this.dataService.updateGroup(req['user'].sub, grp)
     }
 
     @UseGuards(AuthGuard)

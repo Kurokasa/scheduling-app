@@ -274,6 +274,18 @@ export class DataService{
     this.update();
   }
 
+  updateGroup(group: Group){
+    console.log('updateGroup: ', group);
+    this.http.post(environment.SERVER + '/data/updateGroup', group).subscribe({
+      next: data => {
+        console.log('Group updated: ', data);
+      },
+      error: error => {
+        console.error('There was an error!', error);
+      }
+    })
+  }
+
   async addMeeting(newMeeting: Meeting): Promise<Meeting>{
     let userInGroup = this.groups.find((group) => group.id === newMeeting.grp);
     let isNewMeeting = !this.loadedMeetings.find((meeting) => meeting.date === newMeeting.date)

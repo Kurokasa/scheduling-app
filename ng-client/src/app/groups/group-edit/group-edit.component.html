@@ -2,8 +2,8 @@
     <div class="header">
         <div class="grp-container">
             <div style="display: flex; flex-direction: row; width: 100%; justify-content: space-between">
-                <input type="text" name="" id="" class="name" value="{{ group.name }}">
-                <button *ngIf="isAdmin" class="edit-btn">Save</button>
+                <input type="text" name="" id="" class="name" [(ngModel)]="group.name">
+                <button *ngIf="isAdmin" class="edit-btn" (click)="save()">Save</button>
             </div>
             
             <div class="mbr-container">
