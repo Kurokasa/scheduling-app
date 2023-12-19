@@ -38,7 +38,7 @@ img{
     font-size: 5vw;
     font-family: 'Advent Pro', sans-serif;
     font-weight: 700;
-    width: 72%;
+    width: 100%;
 
     border: none;
     border-bottom: solid 1px;
@@ -50,6 +50,7 @@ img{
 }
 .edit-btn{
     width: 25%;
+    margin-left: 2vw;
     align-self: center;
     background-color: rgb(137, 116, 255);
 }
@@ -113,4 +114,7 @@ button{
     color: var(--main-font-color);
     font-family: var(--font-main);
     font-size: 3vw;
+}
+.admin{
+    border-color: #ff8000;
 }

@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Group } from '../../shared/group.model';
 import { DataService } from '../../shared/data.service';
 import { environment } from '../../../environments/environment';
-import { Router } from 'express';
+import { UserService } from '../../shared/user.service';
 
 @Component({
   selector: 'app-group-edit',
@@ -12,17 +12,20 @@ import { Router } from 'express';
 })
 export class GroupEditComponent implements OnInit{
 
-  group: Group;
+  @Input() group: Group;
+  isAdmin = false;
   joinLink = environment.FRONTEND + '/group/join/';
 
-  constructor(private dataService: DataService, private route: ActivatedRoute) {
-
-  }
+  constructor(private dataService: DataService, private user: UserService) {}
 
   ngOnInit(): void {
-    this.group = this.dataService.getGroup(this.route.snapshot.params['grp']);
     this.joinLink = this.joinLink + this.group.id;
+    this.group.members.forEach(member => {
+      if (member.status === 'admin' && member.id === this.user.id)
+        this.isAdmin = true;
+    });
   }
+
   copyLink(text){
     console.log(text);
     const textArea = document.createElement('textarea');

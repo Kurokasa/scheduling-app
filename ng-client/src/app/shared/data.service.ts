@@ -80,6 +80,9 @@ export class DataService{
 
   constructor(private http: HttpClient, private user: UserService){
     this.endDate.setDate(new Date().getDate() + 60);
+    if (this.user.jwt){
+      this.update();
+    }
   }
 
   async update(){

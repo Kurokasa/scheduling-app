@@ -3,11 +3,11 @@
         <div class="grp-container">
             <div style="display: flex; flex-direction: row; width: 100%; justify-content: space-between">
                 <input type="text" name="" id="" class="name" value="{{ group.name }}">
-                <button class="edit-btn">Save</button>
+                <button *ngIf="isAdmin" class="edit-btn">Save</button>
             </div>
             
             <div class="mbr-container">
-                <span class="member" *ngFor="let member of group.members">{{ member.name }}</span>
+                <span class="member" *ngFor="let member of group.members" [ngClass]="member.status">{{ member.name }}</span>
             </div>
         </div>
         <div class="container-img">
