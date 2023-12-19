@@ -10,7 +10,7 @@ import { environment } from '../../environments/environment';
 interface GrpDTO {
   id: string; 
   name: string; 
-  ImgLink: string; 
+  imgLink: string; 
   users: {userID: string, groupID: string, isAdmin: boolean, user: UserDTO}[];
   schedules: ScheduleDTO[];
   meetings: MeetingDTO[];
@@ -114,7 +114,7 @@ export class DataService{
           let newSchedules = grp.schedules.map( (sched) => {
             return {startDate: new Date(sched.startDate), repeate: sched.repeate}
           })
-          this.groups.push(new Group(grp.id, grp.name, grp.ImgLink, newMembers, newSchedules, newMeetings)      
+          this.groups.push(new Group(grp.id, grp.name, grp.imgLink, newMembers, newSchedules, newMeetings)      
           )
         }
     console.log('Groups:');
