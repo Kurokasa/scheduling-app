@@ -209,6 +209,7 @@ export class DataService {
             })
         return grp;  
     }
+    
     async deleteGroup(userID: any, groupID: any){
         let grp = await this.prismaService.group.findUnique({
             where: {

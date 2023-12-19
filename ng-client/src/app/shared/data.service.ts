@@ -76,7 +76,6 @@ export class DataService{
 
   loadedMeetings: Meeting[] = [];
   meetings: Meeting[] = [];
-  userSub: Subscription;
 
   constructor(private http: HttpClient, private user: UserService){
     this.endDate.setDate(new Date().getDate() + 60);
