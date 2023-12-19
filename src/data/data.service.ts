@@ -209,6 +209,40 @@ export class DataService {
             })
         return grp;  
     }
+    async deleteGroup(userID: any, groupID: any){
+        let grp = await this.prismaService.group.findUnique({
+            where: {
+                id: groupID
+            }
+        })
+        if(!grp)
+            throw new HttpException('Group not found', HttpStatus.NOT_FOUND);
+        
+        await this.prismaService.users.deleteMany({
+            where: {
+                groupID
+            }
+            }).catch( (err) => {
+                switch(err.code){
+                    default:
+                        console.log('Unknown Error in deleteGroup() ', err);
+                        throw new HttpException('Unknown Error in Grp delete', HttpStatus.INTERNAL_SERVER_ERROR);
+                }
+            })
+
+        await this.prismaService.group.delete({
+            where: {
+                id: groupID
+            }
+            }).catch( (err) => {
+                switch(err.code){
+                    default:
+                        console.log('Unknown Error in deleteGroup() ', err);
+                        throw new HttpException('Unknown Error in Grp delete', HttpStatus.INTERNAL_SERVER_ERROR);
+                }
+            })
+        return grp;  
+    }
 
     async updateGroup(userID: any, grp: Group){
         console.log(grp)

@@ -38,7 +38,10 @@ export class GroupEditComponent implements OnInit{
   }
 
   leaveGroup(){
-    this.dataService.leaveGroup(this.group.id);
+    if (this.isAdmin)
+      this.dataService.deleteGroup(this.group.id);
+    else
+      this.dataService.leaveGroup(this.group.id);
   }
 
   save(){

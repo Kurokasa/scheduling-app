@@ -286,6 +286,18 @@ export class DataService{
     this.update();
   }
 
+  deleteGroup(groupId: string){
+    this.http.post(environment.SERVER + '/data/deleteGroup/' + groupId, null).subscribe({
+      next: data => {
+        console.log('Group deleted: ', data);
+      },
+      error: error => {
+        console.error('There was an error!', error);
+      }
+    })
+    this.update();
+  }
+
   updateGroup(group: Group){
     this.http.post(environment.SERVER + '/data/updateGroup', group).subscribe({
       next: data => {

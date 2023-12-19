@@ -21,7 +21,7 @@
             <a #grpLink style="overflow: hidden; align-self: center; font-size: 3vw;">{{ joinLink }}</a>
         </div>
         <div class="container-btn">
-            <button (click)="leaveGroup()" routerLink="/groups">Leave</button>
+            <button (click)="leaveGroup()" routerLink="/groups" [innerText]="isAdmin ? 'Delete' : 'Leave'"></button>
         </div>
     </div>
     

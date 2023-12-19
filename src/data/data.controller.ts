@@ -45,6 +45,11 @@ export class DataController {
         return this.dataService.leaveGroup(req['user'].sub, grp.id)
     }
     @UseGuards(AuthGuard)
+    @Post('deleteGroup/:id')
+    deleteGroup(@Request() req, @Param() grp){
+        return this.dataService.deleteGroup(req['user'].sub, grp.id)
+    }
+    @UseGuards(AuthGuard)
     @Post('updateGroup')
     updateGroup(@Request() req, @Body() grp: Group){
         return this.dataService.updateGroup(req['user'].sub, grp)
