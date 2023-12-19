@@ -42,7 +42,6 @@ export class GroupEditComponent implements OnInit{
   }
 
   save(){
-    console.log('saving: ', this.group);
     if (this.group.name !== '' && this.group.id)
       this.dataService.updateGroup(this.group);
   }

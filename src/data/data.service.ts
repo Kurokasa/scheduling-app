@@ -191,7 +191,6 @@ export class DataService {
     }
 
     async updateGroup(userID: any, grp: Group){
-        console.log('updateGroup')
         console.log(grp)
         let group = await this.prismaService.group.findUnique({
             where: {

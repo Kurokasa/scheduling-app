@@ -275,7 +275,6 @@ export class DataService{
   }
 
   updateGroup(group: Group){
-    console.log('updateGroup: ', group);
     this.http.post(environment.SERVER + '/data/updateGroup', group).subscribe({
       next: data => {
         console.log('Group updated: ', data);
