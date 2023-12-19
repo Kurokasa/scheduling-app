@@ -153,9 +153,6 @@ export class DataService {
             }
             }).catch( (err) => {
                 switch(err.code){
-                    case 'P2002':
-                        throw new HttpException('User already in Group', HttpStatus.BAD_REQUEST);
-                        break;
                     default:
                         console.log('Unknown Error in joinGroup() ', err);
                         throw new HttpException('Unknown Error in Grp join', HttpStatus.INTERNAL_SERVER_ERROR);
@@ -163,6 +160,36 @@ export class DataService {
             })
         return grp;  
     }
+
+    async leaveGroup(userID: any, groupID: any){
+        let grp = await this.prismaService.group.findUnique({
+            where: {
+                id: groupID
+            }
+        })
+        if(!grp)
+            throw new HttpException('Group not found', HttpStatus.NOT_FOUND);
+        
+        await this.prismaService.users.delete({
+            where: {
+                userID_groupID: {
+                    userID,
+                    groupID
+                }
+            }
+            }).catch( (err) => {
+                switch(err.code){
+                    case 'P2001':
+                        throw new HttpException('User not in Group', HttpStatus.BAD_REQUEST);
+                        break;
+                    default:
+                        console.log('Unknown Error in leaveGroup() ', err);
+                        throw new HttpException('Unknown Error in Grp leave', HttpStatus.INTERNAL_SERVER_ERROR);
+                }
+            })
+        return grp;  
+    }
+
     async acceptMeeting(userID: any, meetingID: any){
         let meeting = await this.prismaService.meeting.findUnique({
             where: {

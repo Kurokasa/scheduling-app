@@ -34,6 +34,12 @@ export class DataController {
         return this.dataService.joinGroup(req['user'].sub, grp.id)
     }
     @UseGuards(AuthGuard)
+    @Post('leave/:id')
+    leaveGroup(@Request() req, @Param() grp){
+        return this.dataService.leaveGroup(req['user'].sub, grp.id)
+    }
+
+    @UseGuards(AuthGuard)
     @Post('meeting/accept/:id')
     acceptMeeting(@Request() req, @Param() meet){
         return this.dataService.acceptMeeting(req['user'].sub, meet.id)

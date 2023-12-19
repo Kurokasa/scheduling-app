@@ -33,4 +33,8 @@ export class GroupEditComponent implements OnInit{
     document.execCommand('copy');
     document.body.removeChild(textArea);
   }
+
+  leaveGroup(){
+    this.dataService.leaveGroup(this.group.id);
+  }
 }

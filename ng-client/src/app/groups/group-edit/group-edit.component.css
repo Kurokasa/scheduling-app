@@ -1,4 +1,4 @@
-.header{
+.container{
     width: 100%;
     border: solid;
     border-width: 0.5vw;
@@ -6,6 +6,9 @@
 
     border-color: var(--waiting-brd-color);
     background-color: var(--waiting-bg-color);
+}
+.header{
+    width: 100%;
 
     display: flex;
     justify-content: space-between;
@@ -60,11 +63,41 @@ span{
 }
 .vl {
   border-left: 0.5vw solid var(--waiting-brd-color);
-  height: 100%;
+  height: 1.5rem;
   margin: 0 1vw;
 }
 .lnk-container{
+    max-width: 66%;
+    border: solid;
+    border-width: 0.5vw;
+    border-radius: 1.25vw;
+
+    display: flex;
+    justify-content: space-between;
+
+    border-color: var(--waiting-brd-color);
+    background-color: var(--waiting-bg-color);
+
+    margin: 1vw 2vw;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+}
+.container-btn{
+    width: 34%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+button{
+    height: 75%;
+    width: 75%;
+
+    border: none;
+    border-radius: 1.25vw;
+    background-color: rgb(200, 15, 15);
+
+    color: var(--main-font-color);
+    font-family: var(--font-main);
+    font-size: 3.5vw;
 }

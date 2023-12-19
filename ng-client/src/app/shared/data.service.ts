@@ -259,6 +259,18 @@ export class DataService{
         return grp;
   }
 
+  leaveGroup(groupId: string){
+    this.http.post(environment.SERVER + '/data/leave/' + groupId, null).subscribe({
+      next: data => {
+        console.log('Group left: ', data);
+      },
+      error: error => {
+        console.error('There was an error!', error);
+      }
+    })
+    this.update();
+  }
+
   async addMeeting(newMeeting: Meeting): Promise<Meeting>{
     let userInGroup = this.groups.find((group) => group.id === newMeeting.grp);
     let isNewMeeting = !this.loadedMeetings.find((meeting) => meeting.date === newMeeting.date)
