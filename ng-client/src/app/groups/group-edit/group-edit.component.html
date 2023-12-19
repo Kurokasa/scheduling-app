@@ -5,7 +5,7 @@
                 <input type="text" name="" id="" class="name" [(ngModel)]="group.name">
                 <button *ngIf="isAdmin" class="edit-btn" (click)="save()">Save</button>
             </div>
-            
+            <input *ngIf="isAdmin" type="text" name="" id="" class="imgLink" [(ngModel)]="group.imgLink">
             <div class="mbr-container">
                 <span class="member" *ngFor="let member of group.members" [ngClass]="member.status">{{ member.name }}</span>
             </div>
