@@ -20,6 +20,7 @@ import localeDe from '@angular/common/locales/de';
 import { registerLocaleData } from '@angular/common';
 import { jwtInterceptor } from './shared/jwt-Intercepter';
 import { LoginComponent } from './login/login.component';
+import { GroupJoinComponent } from './groups/group-join/group-join.component';
 registerLocaleData(localeDe, 'de');
 
 @NgModule({
@@ -35,7 +36,8 @@ registerLocaleData(localeDe, 'de');
     GroupEditComponent,
     ReScheduleComponent,
     MsgBoxComponent,
-    LoginComponent
+    LoginComponent,
+    GroupJoinComponent
   ],
   imports: [
     BrowserModule,

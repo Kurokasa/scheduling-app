@@ -5,10 +5,10 @@
             <div class="mbr-container">
                 <span *ngFor="let member of group.members">{{ member.name }}</span>
             </div>
-            <div class="header" style="padding: 1vw; margin-bottom: 1vw;">
+            <div class="header lnk-container" style="padding: 1vw; margin-bottom: 1vw;">
                 <i style="font-size: 1.5rem; color: var(--waiting-brd-color);" class="pi pi-copy" (click)="copyLink(grpLink.innerHTML)"></i>
                 <div class="vl"></div>
-                <a #grpLink style="overflow: hidden; align-self: center;">https://www.udemy.com/test123456789</a>
+                <a #grpLink style="overflow: hidden; align-self: center;">{{ joinLink }}</a>
             </div>
         </div>
         <div class="container-img">

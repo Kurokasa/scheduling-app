@@ -253,9 +253,9 @@ export class DataService{
     return this.meetings.indexOf(meeting);
   }
 
-  getGroup(groupName: string){
+  getGroup(groupId: string){
     for (let grp of this.groups)
-      if (groupName === grp.name)
+      if (groupId === grp.id)
         return grp;
   }
 

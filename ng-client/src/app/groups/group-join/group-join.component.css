@@ -1,0 +1,16 @@
+div{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+h1{
+    text-align: center;
+    color: var(--main-font-color);
+    font-size: 6vw;
+    font-family: var(--font-main);
+    font-weight: 700;
+}
+.spinner{
+    align-self: center;
+}

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Group } from '../../shared/group.model';
 import { DataService } from '../../shared/data.service';
+import { environment } from '../../../environments/environment';
+import { Router } from 'express';
 
 @Component({
   selector: 'app-group-edit',
@@ -11,6 +13,7 @@ import { DataService } from '../../shared/data.service';
 export class GroupEditComponent implements OnInit{
 
   group: Group;
+  joinLink = environment.FRONTEND + '/group/join/';
 
   constructor(private dataService: DataService, private route: ActivatedRoute) {
 
@@ -18,6 +21,7 @@ export class GroupEditComponent implements OnInit{
 
   ngOnInit(): void {
     this.group = this.dataService.getGroup(this.route.snapshot.params['grp']);
+    this.joinLink = this.joinLink + this.group.id;
   }
   copyLink(text){
     console.log(text);
