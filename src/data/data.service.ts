@@ -153,12 +153,32 @@ export class DataService {
             }
             }).catch( (err) => {
                 switch(err.code){
+                    case 'P2002':
+                        throw new HttpException('User already in Group', HttpStatus.BAD_REQUEST);
+                        break;
                     default:
                         console.log('Unknown Error in joinGroup() ', err);
                         throw new HttpException('Unknown Error in Grp join', HttpStatus.INTERNAL_SERVER_ERROR);
                 }
             })
         return grp;  
+    }
+
+    async createGroup(userID: any, grp: Group){
+        const newGrp = await this.prismaService.group.create({
+            data:{
+                name: grp.name,
+                imgLink: grp.imgLink,
+            }
+        })
+        await this.prismaService.users.create({
+            data:{
+                userID,
+                groupID: newGrp.id,
+                isAdmin: true
+            }
+        })
+        return newGrp;       
     }
 
     async leaveGroup(userID: any, groupID: any){

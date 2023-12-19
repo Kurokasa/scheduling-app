@@ -6,7 +6,7 @@
                 <button *ngIf="isAdmin" class="edit-btn" (click)="save()">Save</button>
             </div>
             <input *ngIf="isAdmin" type="text" name="" id="" class="imgLink" [(ngModel)]="group.imgLink">
-            <div class="mbr-container">
+            <div *ngIf="group.id" class="mbr-container">
                 <span class="member" *ngFor="let member of group.members" [ngClass]="member.status">{{ member.name }}</span>
             </div>
         </div>
@@ -14,8 +14,8 @@
             <img *ngIf="group.imgLink" [src]="group.imgLink">
         </div>
     </div>
-    <div class="header">
-        <div class="lnk-container" style="padding: 1vw; margin-bottom: 1vw;">
+    <div *ngIf="group.id" class="header">
+        <div class="lnk-container" style="padding: 1vw;">
             <i style="font-size: 3vw; color: var(--waiting-brd-color);" class="pi pi-copy" (click)="copyLink(grpLink.innerHTML)"></i>
             <div class="vl"></div>
             <a #grpLink style="overflow: hidden; align-self: center; font-size: 3vw;">{{ joinLink }}</a>

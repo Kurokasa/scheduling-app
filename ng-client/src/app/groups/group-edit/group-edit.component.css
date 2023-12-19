@@ -34,7 +34,7 @@ img{
 }
 .name{
     color: var(--main-font-color);
-    margin-top: 1vw;
+    margin: 1vw 0;
     font-size: 5vw;
     font-family: 'Advent Pro', sans-serif;
     font-weight: 700;
@@ -48,7 +48,7 @@ img{
 }
 .imgLink{
     color: var(--main-font-color);
-    margin-top: 1vw;
+    margin-bottom: 1vw;
     font-size: 4vw;
     font-family: 'Advent Pro', sans-serif;
     font-weight: 700;
@@ -67,7 +67,7 @@ img{
     background-color: rgb(137, 116, 255);
 }
 .mbr-container{
-    margin: 1vw 0;
+    margin-bottom: 1vw;
     display: flex;
     flex-wrap: wrap;
 }
@@ -93,7 +93,7 @@ img{
   margin: 0 1vw;
 }
 .lnk-container{
-    max-width: 67%;
+    max-width: 65%;
     border: solid;
     border-width: 1px;
     border-radius: 1.25vw;
@@ -104,7 +104,7 @@ img{
     border-color: var(--waiting-brd-color);
     background-color: var(--waiting-bg-color);
 
-    margin: 1vw;
+    margin: 2vw;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;

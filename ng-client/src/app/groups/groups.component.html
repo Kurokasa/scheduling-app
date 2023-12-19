@@ -2,5 +2,5 @@
     <div *ngFor="let grp of dataService.groups">
         <app-group-edit [group]="grp"></app-group-edit>
     </div>
-    <i class="pi pi-plus"></i>
+    <i class="pi pi-plus" (click)="createEmptyGroup()"></i>
 </div>

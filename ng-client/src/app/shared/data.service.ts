@@ -262,6 +262,18 @@ export class DataService{
         return grp;
   }
 
+  createGroup(newGroup: Group){
+    this.http.post(environment.SERVER + '/data/createGroup', newGroup).subscribe({
+      next: data => {
+        console.log('Group created: ', data);
+      },
+      error: error => {
+        console.error('There was an error!', error);
+      }
+    })
+    this.update();
+  }
+
   leaveGroup(groupId: string){
     this.http.post(environment.SERVER + '/data/leave/' + groupId, null).subscribe({
       next: data => {

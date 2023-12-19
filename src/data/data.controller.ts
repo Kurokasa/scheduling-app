@@ -35,6 +35,11 @@ export class DataController {
         return this.dataService.joinGroup(req['user'].sub, grp.id)
     }
     @UseGuards(AuthGuard)
+    @Post('createGroup')
+    createGroup(@Request() req, @Body() grp: Group){
+        return this.dataService.createGroup(req['user'].sub, grp)
+    }
+    @UseGuards(AuthGuard)
     @Post('leave/:id')
     leaveGroup(@Request() req, @Param() grp){
         return this.dataService.leaveGroup(req['user'].sub, grp.id)
