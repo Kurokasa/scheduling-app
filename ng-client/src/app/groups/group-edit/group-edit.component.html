@@ -1,9 +1,13 @@
 <div class="container">
     <div class="header">
         <div class="grp-container">
-            <input type="text" name="" id="" class="name" value="{{ group.name }}">
+            <div style="display: flex; flex-direction: row; width: 100%; justify-content: space-between">
+                <input type="text" name="" id="" class="name" value="{{ group.name }}">
+                <button class="edit-btn">Save</button>
+            </div>
+            
             <div class="mbr-container">
-                <span *ngFor="let member of group.members">{{ member.name }}</span>
+                <span class="member" *ngFor="let member of group.members">{{ member.name }}</span>
             </div>
         </div>
         <div class="container-img">
@@ -12,12 +16,12 @@
     </div>
     <div class="header">
         <div class="lnk-container" style="padding: 1vw; margin-bottom: 1vw;">
-            <i style="font-size: 1.5rem; color: var(--waiting-brd-color);" class="pi pi-copy" (click)="copyLink(grpLink.innerHTML)"></i>
+            <i style="font-size: 3vw; color: var(--waiting-brd-color);" class="pi pi-copy" (click)="copyLink(grpLink.innerHTML)"></i>
             <div class="vl"></div>
-            <a #grpLink style="overflow: hidden; align-self: center;">{{ joinLink }}</a>
+            <a #grpLink style="overflow: hidden; align-self: center; font-size: 3vw;">{{ joinLink }}</a>
         </div>
         <div class="container-btn">
-            <button size="small" (click)="leaveGroup()" routerLink="/groups">Leave</button>
+            <button (click)="leaveGroup()" routerLink="/groups">Leave</button>
         </div>
     </div>
     
