@@ -21,13 +21,14 @@ export class GroupJoinComponent implements OnInit{
           console.log(data);
           this.dataService.update();
           setTimeout(() =>{
-            this.router.navigate(['/group', this.route.snapshot.params['grp']]);
+            this.router.navigate(['/groups']);
         }, 1000);},
         error: error => {
           if(error.error.message == 'User already in Group'){
+            console.log('Error: User already in Group!!');
             this.dataService.update();
             setTimeout(() =>{
-                this.router.navigate(['/group', this.route.snapshot.params['grp']]);
+                this.router.navigate(['/groups']);
             }, 1000); 
           } 
           console.error('There was an error!', error);
