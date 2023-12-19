@@ -9,4 +9,8 @@ import { UserService } from '../shared/user.service';
 export class ProfilComponent {
 
   constructor(public user: UserService) { }
+
+  logout(): void {
+    this.user.logout();
+  }
 }
