@@ -6,15 +6,11 @@ import { DataService } from '../shared/data.service';
   templateUrl: './date-list.component.html',
   styleUrls: ['./date-list.component.css']
 })
-export class DateListComponent implements OnInit{
+export class DateListComponent{
   today: Date;
 
   constructor(public dataService: DataService){
     this.today = new Date();
     this.today.setDate(this.today.getDate() + 1);
-  }
-
-  ngOnInit(): void {
-    this.dataService.update();
   }
 }
