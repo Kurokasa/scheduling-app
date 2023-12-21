@@ -141,16 +141,11 @@ export class DataService{
           this.groups.push(new Group(grp.id, grp.name, grp.imgLink, newMembers, newSchedules, newMeetings)      
           )
         }
-    console.log('Groups:');
-    console.log(this.groups);
     
     // Loads all the meetings from the groups, into the meetings variable
     for (let grp of this.groups)
       for (let meeting of grp.meetings)
         this.loadedMeetings.push(meeting);
-      
-    console.log('Loaded Meetings:');
-    console.log(this.loadedMeetings)
     this.updateMeetings();
   }
 
@@ -228,7 +223,6 @@ export class DataService{
     for (let meeting of this.meetings){
       this.initMeeting(meeting);
     }
-    console.log("Meetings: ", this.meetings)
   }
 
   addMeetings(dayCount?: number){
