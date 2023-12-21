@@ -8,7 +8,7 @@ export class Group {
         public name: string,
         public imgLink: string, 
         public members: Member[] = [],   
-        public schedules: {startDate: Date, repeate: string}[],  // repeate -> none, weekly, biWeekly, monthly
+        public schedules: {startDate: Date, repeat: string}[],  // repeat -> none, weekly, biWeekly, monthly
         public meetings: Meeting[]        
     ) {}
 

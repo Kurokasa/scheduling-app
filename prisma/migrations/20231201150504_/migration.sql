@@ -12,7 +12,7 @@ CREATE TABLE `Schedules` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `groupID` VARCHAR(191) NOT NULL,
     `startDate` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
-    `repeate` VARCHAR(191) NOT NULL DEFAULT 'none',
+    `repeat` VARCHAR(191) NOT NULL DEFAULT 'none',
 
     UNIQUE INDEX `Schedules_id_key`(`id`),
     PRIMARY KEY (`id`)

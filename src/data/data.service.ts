@@ -246,7 +246,6 @@ export class DataService {
     }
 
     async updateGroup(userID: any, grp: Group){
-        console.log(grp)
         let group = await this.prismaService.group.findUnique({
             where: {
                 id: grp.id
@@ -270,6 +269,33 @@ export class DataService {
                         throw new HttpException('Unknown Error in Grp update', HttpStatus.INTERNAL_SERVER_ERROR);
                 }
             })
+        let scheduls = await this.prismaService.schedules.findMany({
+            where: {
+                groupID: grp.id
+            }
+        });
+        for (let newSchedule of grp.schedules){
+            if (!scheduls.find(schedule => schedule.startDate.getTime() == new Date(newSchedule.startDate).getTime() && schedule.repeat == newSchedule.repeat)){
+                await this.prismaService.schedules.create({
+                    data: {
+                        startDate: newSchedule.startDate,
+                        repeat: newSchedule.repeat,
+                        groupID: grp.id
+                    }
+                })
+                console.log('Created new Schedule')
+            }
+        }
+        for (let oldSchedule of scheduls){
+            if (!grp.schedules.find(schedule => new Date(schedule.startDate).getTime() == oldSchedule.startDate.getTime() && schedule.repeat == oldSchedule.repeat)){
+                await this.prismaService.schedules.delete({
+                    where: {
+                        id: oldSchedule.id
+                    },
+                })
+                console.log('Delete old Schedule')
+            }
+        }
         return group;
     }
 

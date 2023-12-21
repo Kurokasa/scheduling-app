@@ -26,7 +26,7 @@ interface ScheduleDTO {
   id: string; 
   groupID: string;
   startDate: string;
-  repeate: string;
+  repeat: string;
 }
 interface MeetingDTO {
   id: string;
@@ -58,7 +58,7 @@ export class DataService{
 
   // groups: Group[] = [
   //   new Group('Grp1', 'Test Group1', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyHrRWjgxU8DgFOGszvioOTR_TNGZuruM0zBGHNrc-QQ&s', [{id: 'testid', name: 'Mark', status: 'waiting'}, {id: 'testid', name: 'Jessy', status: 'waiting'}],
-  //     [{startDate: new Date('11.01.2023 23:50'), repeate: 'weekly'}, {startDate: new Date('11.03.2023 02:00'), repeate: 'monthly'}],
+  //     [{startDate: new Date('11.01.2023 23:50'), repeat: 'weekly'}, {startDate: new Date('11.03.2023 02:00'), repeat: 'monthly'}],
   //     [
   //       {id: 'TestID1', grp: 'Test Group1', grpName: '', date: new Date('11.01.2023 23:50'), members: [{id: '', name: 'Mark', status: 'accepted'}, {id: '', name: 'Jessy', status: 'accepted'}, {id: '', name: 'Andreas', status: 'accepted'}], reschedules: [], rescheduled: false},
   //       {id: 'TestID2', grp: 'Test Group1', grpName: '', date: new Date('11.03.2023 23:50'), members: [{id: '', name: 'Mark', status: 'accepted'}, {id: '', name: 'Jessy', status: 'waiting'}, {id: '', name: 'Andreas', status: 'accepted'}], reschedules: [], rescheduled: false},
@@ -66,7 +66,7 @@ export class DataService{
   //       {id: 'TestID4', grp: 'Test Group1', grpName: '', date: new Date('11.29.2023 23:50'), members: [{id: '', name: 'Jessy', status: 'accepted'}, {id: '', name: 'Mark', status: 'accepted'}, {id: '', name: 'Andreas', status: 'accepted'}], reschedules: [], rescheduled: false}
   //     ]),
   //   new Group('Grp2', 'Test Group2', '', [{id: 'testid', name: 'Mark', status: 'waiting'}, {id: 'testid', name: 'Jessy', status: 'waiting'}],
-  //     [{startDate: new Date('10.03.2023 03:00'), repeate: 'biWeekly'}],
+  //     [{startDate: new Date('10.03.2023 03:00'), repeat: 'biWeekly'}],
   //     [
   //       {id: 'TestID5', grp: 'Test Group2', grpName: '', date: new Date('11.07.2023 19:00'), members: [{id: '', name: 'Jessy', status: 'accepted'}, {id: '', name: 'Mark', status: 'accepted'}, {id: '', name: 'Andreas', status: 'accepted'}], reschedules: [], rescheduled: false},
   //       {id: 'TestID6', grp: 'Test Group2', grpName: '', date: new Date('11.21.2023 19:00'), members: [{id: '', name: 'Jessy', status: 'accepted'}, {id: '', name: 'Mark', status: 'accepted'}, {id: '', name: 'Andreas', status: 'accepted'}], reschedules: [], rescheduled: false},
@@ -77,18 +77,21 @@ export class DataService{
 
   loadedMeetings: Meeting[] = [];
   meetings: Meeting[] = [];
+  userSub: Subscription;
 
   constructor(private http: HttpClient, private user: UserService, private router: Router) {
     this.endDate.setDate(new Date().getDate() + 60);
     if (this.user.jwt){
       this.update();
     }
+    this.userSub = this.user.userUpdated.subscribe(() => {
+      this.update();
+    })
   }
 
   async update(){
     this.groups = [];
     this.loadedMeetings = [];
-
     await this.http.get(environment.SERVER + '/data/user')
       .subscribe({
         next: resp => { 
@@ -136,7 +139,7 @@ export class DataService{
             return new Meeting(meet.id, grp.id, grp.name, new Date(meet.date), meetMembers, reschedules, meet.rescheduled) // Grp.Name korrekt??????
           })
           let newSchedules = grp.schedules.map( (sched) => {
-            return {startDate: new Date(sched.startDate), repeate: sched.repeate}
+            return {startDate: new Date(sched.startDate), repeat: sched.repeat}
           })
           this.groups.push(new Group(grp.id, grp.name, grp.imgLink, newMembers, newSchedules, newMeetings)      
           )
@@ -170,7 +173,7 @@ export class DataService{
         for (let grp of this.groups){
           for (let schedules of grp.schedules){
 
-            switch (schedules.repeate){
+            switch (schedules.repeat){
               case 'weekly':
                 // Check if the date is behind the schedules creation date and if the weekday is the same
                 if(+iDate + (24 * 60 * 60 * 1000) > +schedules.startDate && iDate.getDay() == schedules.startDate.getDay()){
@@ -436,6 +439,5 @@ export class DataService{
     meeting.members[0].status = 'declined';
     this.updateMeeting(meeting);
   }
-
 
 }

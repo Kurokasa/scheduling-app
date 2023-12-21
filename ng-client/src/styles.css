@@ -22,6 +22,7 @@ body{
 }
 .p-inputtext{
     opacity: 0;
+    padding: 0;
 }
 
 .p-datepicker-inline{
@@ -47,9 +48,9 @@ body{
     background: #444444 !important;
     color: var(--main-font-color);
 }
-.p-datepicker-prev{
+/* .p-datepicker-prev{
     display: none !important;
 }
 .p-datepicker-next{
     display: none !important;
-}
+} */

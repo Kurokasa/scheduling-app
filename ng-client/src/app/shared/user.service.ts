@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, Signal } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { Router } from '@angular/router';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,7 @@ export class UserService {
     public username:  string
     public email:     string
     public jwt:       string
+    public userUpdated = new Subject<void>();
     
     constructor(private http: HttpClient, private router: Router){
         this.jwt = localStorage.getItem('jwt');
@@ -36,6 +38,7 @@ export class UserService {
                                 this.id = user['id'];
                                 this.username = user['userName'];
                                 this.email = user['email'];
+                                this.userUpdated.next();
                             },
                             error: error => {
                                 if(error.error.message == 'Unauthorized'){

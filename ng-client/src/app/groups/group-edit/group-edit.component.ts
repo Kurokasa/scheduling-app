@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, ViewChildren } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Group } from '../../shared/group.model';
 import { DataService } from '../../shared/data.service';
@@ -11,10 +11,12 @@ import { UserService } from '../../shared/user.service';
   styleUrls: ['./group-edit.component.css']
 })
 export class GroupEditComponent implements OnInit{
-
+  @ViewChildren('calendar') datePicker;
   @Input() group: Group;
   isAdmin = false;
+  date: Date;
   joinLink = environment.FRONTEND + '/group/join/';
+  repeatOptions = ['none', 'weekly', 'biWeekly', 'monthly'];
 
   constructor(private dataService: DataService, private user: UserService) {}
 
@@ -49,5 +51,22 @@ export class GroupEditComponent implements OnInit{
       this.dataService.updateGroup(this.group);
     else if (this.group.name !== '' && !this.group.id)
       this.dataService.createGroup(this.group);
+  }
+  newSchedule(){
+    this.group.schedules.push({startDate: new Date(), repeat: 'none'});
+  }
+
+  editSchedule(schedule: {startDate: Date, repeat: string}, index: number){
+    this.date = this.datePicker.toArray()[index].value;
+    this.date.setMilliseconds(0);
+    this.date.setSeconds(0);
+    console.log(this.date);
+    this.datePicker.toArray()[index].overlayVisible = false;
+    schedule.startDate = this.date;
+  }
+
+  delSchedule(schedule: {startDate: Date, repeat: string}){
+    let si = this.group.schedules.findIndex(grpSchedule => grpSchedule.startDate == schedule.startDate);
+    this.group.schedules.splice(si, 1);
   }
 }

@@ -23,13 +23,39 @@
         <div class="container-btn">
             <button (click)="leaveGroup()" routerLink="/groups" [innerText]="isAdmin ? 'Delete' : 'Leave'"></button>
         </div>
-    </div>
-    <div style="border-bottom: 1px solid var(--waiting-brd-color); margin: 0 2vw "></div>
-    <div>
-        <div style="display: fley; flex-direction: row;" *ngFor="let schedule of group.schedules">
-            {{ schedule.startDate | date:'EE dd.MM  HH:mm' }}
-            {{ schedule.repeate }}
+    </div>  
+        <div>
+            <div *ngFor="let schedule of group.schedules; let i = index">
+            <div style="border-bottom: 1px solid var(--waiting-brd-color); margin: 0 2vw "></div>
+            <div class="schedule">
+                <p-calendar #calendar [id]="'calendar'+i" [hideOnDateTimeSelect]="false" [showTime]="true" class="calendar" [ngModel]="schedule.startDate" [touchUI]="true" [readonlyInput]="true">
+                    <ng-template pTemplate="footer">
+                        <div style="display: flex; justify-content: space-evenly;">
+                            <p-button (click)="calendar.hideOverlay()" label="Cancle" [outlined]="true" severity="danger"></p-button>
+                            <p-button (click)="editSchedule(schedule, i)" label="Save" [outlined]="true" severity="success"></p-button>
+                        </div>
+                        
+                    </ng-template>
+                </p-calendar>
+                <span style="grid-column: 1; grid-row: 1" class="scheduletxt">{{ schedule.startDate | date:'EEEE' }}</span>
+                <span style="grid-column: 2; grid-row: 1" class="scheduletxt">{{ schedule.startDate | date:'HH:mm' }}</span>
+                <span *ngIf="!isAdmin" style="grid-column: 3; grid-row: 1" class="scheduletxt">{{ schedule.repeat }}</span>
+                <div *ngIf="isAdmin" style="grid-column: 3; grid-row: 1; margin-right: auto; width: 100%; padding: 0.5vw 0vw;">
+                    <select [(ngModel)]="schedule.repeat">
+                        <option value="none">None</option>
+                        <option value="weekly">Weekly</option>
+                        <option value="biWeekly">BiWeekly</option>
+                        <option value="monthly">Monthly</option>
+                    </select>
+                </div>
+                <div style="display: flex; justify-content: center;">
+                    <button *ngIf="isAdmin" (click)="delSchedule(schedule)">Delete</button>
+                </div>  
+            </div>            
         </div>
-    </div>
-    
+        <div *ngIf="isAdmin" style="display: flex; flex-direction: column;">
+            <div style="border-bottom: 1px solid var(--waiting-brd-color); margin: 0 2vw;"></div>
+            <button style="height: 5vw; align-self: center; width: 30%; margin: 1vw;background-color: var(--accepted-brd-color);" (click)="newSchedule()">Add Schedule</button>
+        </div>
+    </div>  
 </div>

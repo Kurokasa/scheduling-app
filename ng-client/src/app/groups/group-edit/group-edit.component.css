@@ -110,7 +110,7 @@ img{
     white-space: nowrap;
 }
 .container-btn{
-    width: 34%;
+    width: 30%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -129,4 +129,48 @@ button{
 }
 .admin{
     border-color: #ff8000;
+}
+.schedule{
+    width: 100%;
+    display: grid; 
+    grid-template-columns: 27% 18% 25% 30%;
+    flex-direction: row;
+    align-items: center;
+}
+.schedule button{
+    height: 5vw;
+}
+.schedule span{
+    margin: 1vw 0 1vw 2vw;
+}
+.calendar{
+    grid-column-start: 1;
+    grid-column-end: 3;
+    grid-row: 1;
+}
+select{
+    width: 100%;
+    background-color: transparent;
+    font-size: 4vw;
+    font-family: 'Advent Pro', sans-serif;
+    font-weight: 700;
+    color: var(--main-font-color);
+}
+select:focus{
+    outline:none;
+}
+select option{
+    background-color: var(--waiting-bg-color);
+    font-size: 4vw;
+    font-family: 'Advent Pro', sans-serif;
+    font-weight: 700;
+    color: var(--main-font-color);
+}
+.scheduletxt{
+    color: var(--main-font-color);
+    margin-bottom: 1vw;
+    font-size: 4vw;
+    font-family: 'Advent Pro', sans-serif;
+    font-weight: 700;
+    width: 100%;
 }

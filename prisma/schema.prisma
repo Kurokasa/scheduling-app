@@ -43,7 +43,7 @@ model Schedules {
   id        Int          @id @unique @default(autoincrement())
   groupID   String
   startDate DateTime     @default(now())
-  repeate   String       @default("none")
+  repeat   String       @default("none")
 
   group     Group        @relation(fields: [groupID], references: [id])
 }
