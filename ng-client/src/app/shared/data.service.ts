@@ -6,6 +6,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { UserService } from './user.service';
 import { Subscription, lastValueFrom } from 'rxjs';
 import { environment } from '../../environments/environment';
+import { Router } from '@angular/router';
 
 interface GrpDTO {
   id: string; 
@@ -77,7 +78,7 @@ export class DataService{
   loadedMeetings: Meeting[] = [];
   meetings: Meeting[] = [];
 
-  constructor(private http: HttpClient, private user: UserService){
+  constructor(private http: HttpClient, private user: UserService, private router: Router) {
     this.endDate.setDate(new Date().getDate() + 60);
     if (this.user.jwt){
       this.update();
@@ -89,12 +90,33 @@ export class DataService{
     this.loadedMeetings = [];
 
     await this.http.get(environment.SERVER + '/data/user')
-      .subscribe( (resp:{email: string, id: string, userName: string}) => {
-        this.user.id = resp.id;
-        this.user.email = resp.email;
-        this.user.username = resp.userName;
+      .subscribe({
+        next: resp => { 
+          this.user.id = resp['id'];
+          this.user.email = resp['email'];
+          this.user.username = resp['userName'];},
+        error: error => {
+          if(error.error.message == 'Unauthorized')
+            this.user.logout();
+          else
+            console.error('There was an error!', error);
+        }
       })
-    const resp = await lastValueFrom(this.http.get<GrpDTO[]>(environment.SERVER + '/data/groups'))
+
+
+      //   (resp:{email: string, id: string, userName: string}) => {
+      //   this.user.id = resp.id;
+      //   this.user.email = resp.email;
+      //   this.user.username = resp.userName;
+      // })
+    
+    const resp = await lastValueFrom(this.http.get<GrpDTO[]>(environment.SERVER + '/data/groups')).catch((error) => {
+      if(error.error.message == 'Unauthorized')
+        this.user.logout();
+      else
+        console.error('There was an error!', error);
+      return [];
+    });
         for (let grp of resp){
           let newMembers: Member[] = grp.users.map( (mem):Member => {
             return {id: mem.userID, name: mem.user.userName, status: mem.isAdmin == true? 'admin' : 'user'}
@@ -267,7 +289,12 @@ export class DataService{
         console.log('Group created: ', data);
       },
       error: error => {
-        console.error('There was an error!', error);
+        if(error.error.message == 'Unauthorized'){
+          this.user.logout();
+          
+        }
+        else
+          console.error('There was an error!', error);
       }
     })
     this.update();
@@ -279,7 +306,12 @@ export class DataService{
         console.log('Group left: ', data);
       },
       error: error => {
-        console.error('There was an error!', error);
+        if(error.error.message == 'Unauthorized'){
+          this.user.logout();
+          
+        }
+        else
+          console.error('There was an error!', error);
       }
     })
     this.update();
@@ -291,7 +323,12 @@ export class DataService{
         console.log('Group deleted: ', data);
       },
       error: error => {
-        console.error('There was an error!', error);
+        if(error.error.message == 'Unauthorized'){
+          this.user.logout();
+          
+        }
+        else
+          console.error('There was an error!', error);
       }
     })
     this.update();
@@ -303,6 +340,10 @@ export class DataService{
         console.log('Group updated: ', data);
       },
       error: error => {
+        if(error.error.message == 'Unauthorized'){
+          this.user.logout();
+          
+        }
         console.error('There was an error!', error);
       }
     })
@@ -321,8 +362,14 @@ export class DataService{
               resolve(newMeeting);
             },
             error: error => {
-              console.error('There was an error!', error);
-              reject(error);
+              if(error.error.message == 'Unauthorized'){
+                this.user.logout();
+                
+              }
+              else{
+                console.error('There was an error!', error);
+                reject(error);
+              }
             } 
           })
       });
@@ -337,7 +384,10 @@ export class DataService{
           console.log('acceptMeeting: ', data);
         },
         error: error => {
-          console.error('There was an error!', error);
+          if(error.error.message == 'Unauthorized')
+            this.user.logout();
+          else
+            console.error('There was an error!', error);
         }
       })
       meeting.members[0].status = 'accepted';
@@ -350,7 +400,10 @@ export class DataService{
           console.log('acceptMeeting: ', data);
         },
         error: error => {
-          console.error('There was an error!', error);
+          if(error.error.message == 'Unauthorized')
+            this.user.logout();
+          else
+            console.error('There was an error!', error);
         }
       })
       meeting.members[0].status = 'accepted';
@@ -365,7 +418,10 @@ export class DataService{
           console.log('declineMeeting: ', data);
         },
         error: error => {
-          console.error('There was an error!', error);
+          if(error.error.message == 'Unauthorized')
+            this.user.logout();
+          else
+            console.error('There was an error!', error);
         }
       })
     }
@@ -376,7 +432,10 @@ export class DataService{
           console.log('declineMeeting: ', data);
         },
         error: error => {
-          console.error('There was an error!', error);
+          if(error.error.message == 'Unauthorized')
+            this.user.logout();
+          else
+            console.error('There was an error!', error);
         }
       })
     }

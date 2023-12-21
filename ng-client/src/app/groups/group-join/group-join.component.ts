@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
 import { DataService } from '../../shared/data.service';
+import { UserService } from '../../shared/user.service';
 
 @Component({
   selector: 'app-group-join',
@@ -11,7 +12,7 @@ import { DataService } from '../../shared/data.service';
 })
 export class GroupJoinComponent implements OnInit{
 
-  constructor(private route: ActivatedRoute, private router: Router,  private http: HttpClient, private dataService: DataService) { }
+  constructor(private user: UserService,private route: ActivatedRoute, private router: Router,  private http: HttpClient, private dataService: DataService) { }
 
   ngOnInit(): void {
     console.log(this.route.snapshot.params['grp']);
@@ -30,8 +31,12 @@ export class GroupJoinComponent implements OnInit{
             setTimeout(() =>{
                 this.router.navigate(['/groups']);
             }, 1000); 
-          } 
-          console.error('There was an error!', error);
+          }
+          if(error.error.message == 'Unauthorized'){
+            this.user.logout();
+          }
+          else
+            console.error('There was an error!', error);
       }});
   }
 }

@@ -24,5 +24,12 @@
             <button (click)="leaveGroup()" routerLink="/groups" [innerText]="isAdmin ? 'Delete' : 'Leave'"></button>
         </div>
     </div>
+    <div style="border-bottom: 1px solid var(--waiting-brd-color); margin: 0 2vw "></div>
+    <div>
+        <div style="display: fley; flex-direction: row;" *ngFor="let schedule of group.schedules">
+            {{ schedule.startDate | date:'EE dd.MM  HH:mm' }}
+            {{ schedule.repeate }}
+        </div>
+    </div>
     
 </div>
