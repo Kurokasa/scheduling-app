@@ -251,19 +251,33 @@ export class DataService{
   }
 
   initMeeting(meeting: Meeting){
-    // ToDo: Users with the same name will break this.
-    // ToDo: Send information about changes to the server? Maybe some where else?
     let state;
 
     // sorts the user to the front for better visability
     let newMemberList: Member[] = [];
+    let thisMember: Member;
+    let waitingMembers: Member[] = [];
+    let declinedMembers: Member[] = [];
+
     for(let memberIndex in meeting.members){
       if (meeting.members[memberIndex].id === this.user.id){
-        newMemberList = meeting.members.slice(+memberIndex);
-        newMemberList = newMemberList.concat(meeting.members.slice(0, +memberIndex));
-        meeting.members = newMemberList;
+        thisMember = meeting.members[memberIndex];
+      }
+      else if(meeting.members[memberIndex].status === 'waiting'){
+        waitingMembers.push(meeting.members[memberIndex]);
+      }
+      else if(meeting.members[memberIndex].status === 'declined'){
+        declinedMembers.push(meeting.members[memberIndex]);
+      }
+      else{
+        newMemberList.push(meeting.members[memberIndex]);
       }
     }
+    newMemberList.unshift(thisMember);
+    newMemberList = newMemberList.concat(waitingMembers);
+    newMemberList = newMemberList.concat(declinedMembers);
+    meeting.members = newMemberList;  
+
     for( let reschedule of meeting.reschedules)
       this.initMeeting(reschedule);
     
