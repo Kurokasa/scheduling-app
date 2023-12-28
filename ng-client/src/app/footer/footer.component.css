@@ -1,12 +1,13 @@
 .container{
     height: 100%;
+    width: 100%;
     background-color: #444444;
     display: flex;
     justify-content: space-evenly;
 }
 .wrapper{
     height: 100%;
-    width: 25vw;
+    width: 25%;
     display: flex;
     align-items: center; /* items fallen immer weiter nach unten mit wachsender breite */
     justify-content: center;

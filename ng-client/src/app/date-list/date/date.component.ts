@@ -12,6 +12,9 @@ export class DateComponent {
 
   constructor(private dataService: DataService){}
 
+  info(){
+    console.log(this.meeting);
+  }
   accept(){
     this.meeting.members[0].status = 'accepted';
     this.dataService.acceptMeeting(this.meeting);

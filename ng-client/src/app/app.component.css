@@ -1,11 +1,11 @@
 .container{
     height: 100vh;
-    width: 100vw;
+    width: 100%;
     background-color: #444444;
 }
 .contant{
     padding-top: 2.5vw;
-    width: 95vw;
+    width: 95%;
     height: 92vh;
     position: relative;
     left: 2.5%;
@@ -23,7 +23,7 @@
 .footer{
     position: fixed;
     bottom: 0;
-    width: 95vw;
+    width: 95%;
     height: 8vh;
     left: 2.5%;
 }
