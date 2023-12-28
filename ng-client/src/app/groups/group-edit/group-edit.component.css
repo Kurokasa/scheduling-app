@@ -75,7 +75,7 @@ img{
     height: fit-content;
 
     color: var(--main-font-color);
-    font-family: var(--font-main);
+    font-family: var(--font-off);
     font-size: 0.75rem;
     font-weight: 400;
 
@@ -124,8 +124,8 @@ button{
     background-color: rgb(200, 15, 15);
 
     color: var(--main-font-color);
-    font-family: var(--font-main);
-    font-size: 3vw;
+    font-family: var(--font-off);
+    font-size: 4vw;
 }
 .admin{
     border-color: #ff8000;
