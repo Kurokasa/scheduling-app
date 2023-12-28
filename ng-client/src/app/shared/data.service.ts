@@ -163,6 +163,7 @@ export class DataService{
     for (let iDate = new Date(today.getFullYear(), today.getMonth(), 1); iDate < this.endDate; iDate.setDate(iDate.getDate() + 1)){
       
       // Check if there is already a meeting at that date, then either add that meeting or create a new one
+      // ToDo: BUG: right now there can only be 1 meeting per day
       let foundSchedule = this.loadedMeetings.find((element) => {
         return element.date.getFullYear() == iDate.getFullYear() && element.date.getMonth() == iDate.getMonth() && element.date.getDate() == iDate.getDate()
         });
@@ -170,6 +171,7 @@ export class DataService{
         this.meetings.push(foundSchedule);
       }
       else{
+        // ToDo: Terrible performance, because it goes through all the groups and schedules for every day
         for (let grp of this.groups){
           for (let schedules of grp.schedules){
 
