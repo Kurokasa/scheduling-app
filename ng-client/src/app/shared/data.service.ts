@@ -290,6 +290,22 @@ export class DataService{
     return this.meetings.indexOf(meeting);
   }
 
+  deleteMeeting(meeting: Meeting){
+    this.http.post(environment.SERVER + '/data/deleteMeeting', meeting).subscribe({
+      next: data => {
+        console.log('Meeting deleted: ', data);
+      },
+      error: error => {
+        if(error.error.message == 'Unauthorized'){
+          this.user.logout();     
+        }
+        else
+          console.error('There was an error!', error);
+      }
+    })
+    this.update();
+  }
+
   getGroup(groupId: string){
     for (let grp of this.groups)
       if (groupId === grp.id)

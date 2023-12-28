@@ -3,6 +3,7 @@ import { DataService } from '../../shared/data.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Meeting } from '../../shared/meeting.model';
 import { Member } from '../../shared/member.model';
+import { UserService } from '../../shared/user.service';
 
 @Component({
   selector: 'app-re-schedule',
@@ -13,6 +14,7 @@ export class ReScheduleComponent implements OnInit{
 
   @ViewChild('calendar') datePicker;
   meeting: Meeting;
+  isAdmin = false;
   reschedules: Meeting[] = [];
   date: Date;
   selectedMeeting: Meeting;
@@ -21,7 +23,7 @@ export class ReScheduleComponent implements OnInit{
   declinedMembers: Member[] = [];
   acceptedMembers: Member[] = [];
 
-  constructor(public dataService: DataService, private route: ActivatedRoute, private router: Router) {}
+  constructor(public dataService: DataService, private route: ActivatedRoute, private router: Router, private user: UserService) {}
 
   ngOnInit(): void {
     this.route.params.subscribe( params => {
@@ -38,6 +40,10 @@ export class ReScheduleComponent implements OnInit{
       console.log('My Reschedules: ', this.reschedules)
     })
     this.date = this.meeting.date;
+    this.dataService.getGroup(this.meeting.grp).members.forEach(member => {
+      if (member.status === 'admin' && member.id === this.user.id)
+        this.isAdmin = true;
+    });
   }
 
   createReschedule(){
@@ -68,5 +74,9 @@ export class ReScheduleComponent implements OnInit{
       this.router.navigate(['/list']);
     }
     this.overlay = false;
+  }
+  deleteMeeting(){
+    this.dataService.deleteMeeting(this.meeting);
+    this.router.navigate(['/list']);
   }
 }

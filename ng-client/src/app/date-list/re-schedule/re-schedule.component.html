@@ -6,6 +6,9 @@
                 <h2 class="meeting-date">{{ meeting.date | date:'EE dd.MM.  HH:mm' }}</h2>
                 <h3 class="grp-name">{{ meeting.grpName }}</h3>
             </div>
+            <div class="btn-container">
+                <button *ngIf="isAdmin" (click)="deleteMeeting()" style="background-color: var(--declined);">Delete</button>
+            </div>
             <div class="mbr-container" style="border-top: solid 1px var(--border)" *ngIf="declinedMembers.length > 0">
                 <span *ngFor="let member of declinedMembers" [ngClass]="member.status">{{ member.name }}</span>
             </div>

@@ -24,6 +24,11 @@ export class DataController {
         return this.dataService.postMeeting(req['user'].sub, meet)
     }
     @UseGuards(AuthGuard)
+    @Post('deleteMeeting')
+    deleteMeeting(@Request() req, @Body() meet: Meeting){
+        return this.dataService.deleteMeeting(req['user'].sub, meet)
+    }
+    @UseGuards(AuthGuard)
     @Get('user')
     getUser(@Request() req){
         return this.dataService.getUser(req['user'].sub)

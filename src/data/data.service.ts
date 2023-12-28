@@ -115,6 +115,29 @@ export class DataService {
         }
         return newMeeting;
     }
+    async deleteMeeting(userID: any, meet: Meeting){
+        await this.checkUser(userID, meet.grp);
+        let users = await this.prismaService.users.findFirst({
+            where: {
+                userID,
+                groupID: meet.grp
+            },
+        })
+        if(!users.isAdmin)
+            throw new HttpException('User is not the Group Admin', HttpStatus.UNAUTHORIZED);
+
+        await this.prismaService.members.deleteMany({
+            where: {
+                meetingID: meet.id
+            }
+        })
+        await this.prismaService.meeting.delete({
+            where: {
+                id: meet.id
+            }
+        })
+        return meet;
+    }
     // return the user of the id without the password
     async getUser(id){
         const user = await this.prismaService.user.findUnique({
