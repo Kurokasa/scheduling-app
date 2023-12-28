@@ -178,7 +178,7 @@ export class DataService{
             switch (schedules.repeat){
               case 'weekly':
                 // Check if the date is behind the schedules creation date and if the weekday is the same
-                if(+iDate + (24 * 60 * 60 * 1000) > +schedules.startDate && iDate.getDay() == schedules.startDate.getDay()){
+                if (iDate.getDay() == schedules.startDate.getDay() && +iDate + (24 * 60 * 60 * 1000) > +schedules.startDate){
                     this.meetings.push(new Meeting(
                       null,
                       grp.id,
@@ -192,7 +192,7 @@ export class DataService{
                 }
                 break;
               case 'biWeekly':
-                if(+iDate + (24 * 60 * 60 * 1000) > +schedules.startDate && iDate.getDay() == schedules.startDate.getDay() && Math.floor((+iDate - +schedules.startDate) / (7 * 24 * 60 * 60 * 1000)) % 2 === Math.floor(+schedules.startDate / (7 * 24 * 60 * 60 * 1000)) % 2){
+                if(+iDate + (24 * 60 * 60 * 1000) > +schedules.startDate && iDate.getDay() == schedules.startDate.getDay() && Math.floor((+iDate) / (7 * 24 * 60 * 60 * 1000)) % 2 === Math.floor(+schedules.startDate / (7 * 24 * 60 * 60 * 1000)) % 2){
                   this.meetings.push(new Meeting(
                     null,
                     grp.id,
