@@ -283,6 +283,27 @@ export class DataService {
                         groupID: grp.id
                     }
                 })
+                
+                // create the first meeting of the schedule
+                const newMeeting = await this.prismaService.meeting.create({
+                    data:{
+                        date: newSchedule.startDate,
+                        groupID: grp.id,
+                    }
+                })
+                let members = (await this.prismaService.users.findMany({
+                    where:{
+                        groupID: grp.id
+                    }
+                })).map( (mem) => mem.userID)
+                for (let id of members){
+                    await this.prismaService.members.create({
+                        data: {
+                            userID: id,
+                            meetingID: newMeeting.id
+                        }
+                    })
+                }
                 console.log('Created new Schedule')
             }
         }
