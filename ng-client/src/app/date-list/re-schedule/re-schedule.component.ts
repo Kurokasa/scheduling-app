@@ -17,6 +17,9 @@ export class ReScheduleComponent implements OnInit{
   date: Date;
   selectedMeeting: Meeting;
   overlay: boolean = false;
+  waitingMembers: Member[] = [];
+  declinedMembers: Member[] = [];
+  acceptedMembers: Member[] = [];
 
   constructor(public dataService: DataService, private route: ActivatedRoute, private router: Router) {}
 
@@ -24,6 +27,14 @@ export class ReScheduleComponent implements OnInit{
     this.route.params.subscribe( params => {
       this.meeting = this.dataService.meetings[+params.id];
       this.reschedules = this.meeting.reschedules;
+      for (let mem of this.meeting.members){
+        if (mem.status == 'waiting')
+          this.waitingMembers.push(mem);
+        else if (mem.status == 'accepted')
+          this.acceptedMembers.push(mem);
+        else if (mem.status == 'declined')
+          this.declinedMembers.push(mem);
+      }
       console.log('My Reschedules: ', this.reschedules)
     })
     this.date = this.meeting.date;

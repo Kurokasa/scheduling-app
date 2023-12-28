@@ -19,7 +19,7 @@
 
 <div class="container" (click)="info()">
     <div class="statusbar" [ngClass]="meeting.state"></div>
-    <div class="contant-container">
+    <div class="contant-container" [routerLink]="['/reschedule', dataService.getMeetingID(meeting)]">
         <div class="info-container">
             <h2 class="meeting-date">{{ meeting.date | date:'EE dd.MM.  HH:mm' }}</h2>
             <h3 class="grp-name">{{ meeting.grpName }}</h3>
@@ -27,7 +27,7 @@
         <div class="btn-container">
             <button *ngIf="(meeting.members[0].status === 'waiting' && meeting.state != 'declined') || meeting.members[0].status === 'declined'" (click)="accept()" style="background-color: var(--accepted);">Accept</button>
             <button *ngIf="meeting.members[0].status === 'waiting' || meeting.members[0].status === 'accepted'" (click)="decline()" style="background-color: var(--declined);">Decline</button>
-            <i *ngIf="meeting.state === 'declined'" class="pi pi-calendar-plus" [routerLink]="['/reschedule', dataService.getMeetingID(meeting)]" style="background-color: rgb(137, 116, 255)" (click)="onReschedule()" ></i>
+            <i *ngIf="meeting.state === 'declined'" class="pi pi-calendar-plus" [routerLink]="['/reschedule', dataService.getMeetingID(meeting)]" style="background-color: rgb(137, 116, 255)"></i>
         </div>
         <div class="mbr-container">
             <span *ngFor="let member of meeting.members" [ngClass]="member.status">{{ member.name }}</span>

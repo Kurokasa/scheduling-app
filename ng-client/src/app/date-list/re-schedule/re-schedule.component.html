@@ -1,22 +1,39 @@
 <div>
     <div class="header">
-        <h2 class="headerName" style="font-size: 1.5rem;">{{ meeting.grpName }}</h2>
-        <h2 class="headerDate" style="font-size: 1.5rem;">{{ meeting.date.toLocaleDateString('de-De') }}</h2>
-    </div>
-
-    <div *ngFor="let reschedule of reschedules" class="container" [ngClass]="reschedule.state">
-
-        <div class="top-container" (click)="overlay = true; selectedMeeting = reschedule">
-            <h2 class="date">{{ reschedule.date | date:'EE dd.MM  HH:mm'}}</h2>
+        <div class="statusbar" [ngClass]="meeting.state"></div>
+        <div class="contant-container">
+            <div class="info-container">
+                <h2 class="meeting-date">{{ meeting.date | date:'EE dd.MM.  HH:mm' }}</h2>
+                <h3 class="grp-name">{{ meeting.grpName }}</h3>
+            </div>
+            <div class="mbr-container" style="border-top: solid 1px var(--border)" *ngIf="declinedMembers.length > 0">
+                <span *ngFor="let member of declinedMembers" [ngClass]="member.status">{{ member.name }}</span>
+            </div>
+            <div class="mbr-container" *ngIf="waitingMembers.length > 0">
+                <span *ngFor="let member of waitingMembers" [ngClass]="member.status">{{ member.name }}</span>
+            </div>
+            <div class="mbr-container" *ngIf="acceptedMembers.length > 0">
+                <span *ngFor="let member of acceptedMembers" [ngClass]="member.status">{{ member.name }}</span>
+            </div>
         </div>
-        <hr [ngClass]="reschedule.state">
-        <div class="btm-container">
-            <div class="mbr-container">
-                <span *ngFor="let member of reschedule.members" [ngClass]="member.status">{{ member.name }}</span>
+    </div>
+    <h3 class="headline">Ausweichtermine</h3>
+
+
+    <div *ngFor="let reschedule of reschedules" class="header" style="margin: 2vw 0;" [ngClass]="reschedule.state">
+
+        <div class="statusbar" [ngClass]="reschedule.state"></div>
+        <div class="contant-container">
+            <div class="info-container" (click)="overlay = true; selectedMeeting = reschedule">
+                <h2 class="meeting-date">{{ reschedule.date | date:'EE dd.MM.  HH:mm' }}</h2>
+                <h3 class="grp-name">{{ reschedule.grpName }}</h3>
             </div>
             <div class="btn-container">
-                <i *ngIf="reschedule.members[0].status == 'waiting' || reschedule.members[0].status == 'declined'" class="pi pi-check" style="background-color: var(--accepted)" (click)="accept(reschedule)"></i>
-                <i *ngIf="reschedule.members[0].status == 'waiting' || reschedule.members[0].status == 'accepted'" class="pi pi-times" style="background-color: var(--declined)" (click)="decline(reschedule)"></i>
+                <button *ngIf="reschedule.members[0].status == 'waiting' || reschedule.members[0].status == 'declined'" (click)="accept(reschedule)" style="background-color: var(--accepted);">Accept</button>
+                <button *ngIf="reschedule.members[0].status == 'waiting' || reschedule.members[0].status == 'accepted'" (click)="decline(reschedule)" style="background-color: var(--declined);">Decline</button>
+            </div>
+            <div class="mbr-container" style="border-top: solid 1px var(--border)">
+                <span *ngFor="let member of reschedule.members" [ngClass]="member.status">{{ member.name }}</span>
             </div>
         </div>
         
@@ -31,7 +48,7 @@
                 
             </ng-template>
         </p-calendar>
-        <i class="pi pi-plus btn-outside add"></i>
+        <i class="pi pi-plus add addbtn"></i>
     </div>
 </div>
 <app-msg-box *ngIf="overlay" [msg]="'Soll der Termin übernommen werden?'" [headline]="'Übernehmen'" (accepted)="reschedule($event)"></app-msg-box>

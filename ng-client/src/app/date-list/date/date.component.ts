@@ -10,7 +10,7 @@ import { DataService } from '../../shared/data.service';
 export class DateComponent {
   @Input() meeting: Meeting;
 
-  constructor(private dataService: DataService){}
+  constructor(public dataService: DataService){}
 
   info(){
     console.log(this.meeting);
@@ -22,8 +22,5 @@ export class DateComponent {
   decline(){
     this.meeting.members[0].status = 'declined';
     this.dataService.declineMeeting(this.meeting);
-  }
-  onReschedule(){
-
   }
 }
