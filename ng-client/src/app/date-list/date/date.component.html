@@ -19,8 +19,8 @@
 
 <div class="container" (click)="info()">
     <div class="statusbar" [ngClass]="meeting.state"></div>
-    <div class="contant-container" [routerLink]="['/reschedule', dataService.getMeetingID(meeting)]">
-        <div class="info-container">
+    <div class="contant-container">
+        <div class="info-container" [routerLink]="['/reschedule', dataService.getMeetingID(meeting)]">
             <h2 class="meeting-date">{{ meeting.date | date:'EE dd.MM.  HH:mm' }}</h2>
             <h3 class="grp-name">{{ meeting.grpName }}</h3>
         </div>
