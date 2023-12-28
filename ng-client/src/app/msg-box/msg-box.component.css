@@ -20,7 +20,7 @@
     flex-direction: column;
 
     border: solid;
-    border-width: 0.5vw;
+    border-width: 1px;
     border-radius: 2vw;
     border-color: var(--border);
     background-color: var(--background);
@@ -46,4 +46,18 @@ p{
     margin-top: 2vw;
     display: flex;
     justify-content: space-evenly;
+}
+.btns button{
+    height: 8vw;
+
+    margin-left: 2vw;
+    padding: 1vw 2vw;
+
+    font-family: var(--font-off);
+    font-weight: 500;
+    font-size: 4vw;
+    color: var(--main-font-color);
+
+    border: none;
+    border-radius: 1vw;
 }
