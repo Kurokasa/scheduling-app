@@ -7,12 +7,15 @@
     --main-font-color: rgb(235, 235, 235);
     --main-acc-grey: #ced4da; /* rgb(192, 192, 192) */
 
-    --waiting-bg-color: rgb(122, 122, 122);
-    --waiting-brd-color: rgb(170, 170, 170);
-    --accepted-bg-color: rgba(203, 232, 186, 0.4);
-    --accepted-brd-color: rgb(98, 156, 68);
-    --declined-bg-color: rgb(255, 180, 176, 0.4);
-    --declined-brd-color: rgb(230, 22, 16);
+    --background: rgb(122, 122, 122);
+    --border: rgb(170, 170, 170);
+
+    --accepted:     #71CC43;
+    --declined:     #CC683D;
+    --action:       #8974FF;
+    --waiting:      #AAAAAA;
+    --waiting-bg:   #7A7A7A;
+
 
     --font-off: "Inter var";
     --font-main: "Advent Pro";

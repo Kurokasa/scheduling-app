@@ -1,11 +1,8 @@
 .container{
     width: 100%;
-    border: solid;
-    border-width: 1px;
-    border-radius: 2vw;
 
-    border-color: var(--waiting-brd-color);
-    background-color: var(--waiting-bg-color);
+    border-radius: 2vw;
+    background-color: var(--background);
 }
 .header{
     width: 100%;
@@ -43,8 +40,8 @@ img{
     border: none;
     border-bottom: solid 1px;
 
-    border-color: var(--waiting-brd-color) !important;
-    background-color: var(--waiting-bg-color);
+    border-color: var(--border) !important;
+    background-color: var(--background);
 }
 .imgLink{
     color: var(--main-font-color);
@@ -57,14 +54,14 @@ img{
     border: none;
     border-bottom: solid 1px;
 
-    border-color: var(--waiting-brd-color) !important;
-    background-color: var(--waiting-bg-color);
+    border-color: var(--border) !important;
+    background-color: var(--background);
 }
 .edit-btn{
     width: 25%;
     margin-left: 2vw;
     align-self: center;
-    background-color: rgb(137, 116, 255);
+    background-color: var(--action);
 }
 .mbr-container{
     margin-bottom: 1vw;
@@ -88,7 +85,7 @@ img{
     padding: 0.5vw 1vw;
 }
 .vl {
-  border-left: 1px solid var(--waiting-brd-color);
+  border-left: 1px solid var(--border);
   height: 1rem;
   margin: 0 1vw;
 }
@@ -101,8 +98,8 @@ img{
     display: flex;
     justify-content: space-between;
 
-    border-color: var(--waiting-brd-color);
-    background-color: var(--waiting-bg-color);
+    border-color: var(--border);
+    background-color: var(--background);
 
     margin: 2vw;
     overflow: hidden;
@@ -121,7 +118,7 @@ button{
 
     border: none;
     border-radius: 1.25vw;
-    background-color: rgb(200, 15, 15);
+    background-color: var(--declined);
 
     color: var(--main-font-color);
     font-family: var(--font-off);
@@ -160,7 +157,7 @@ select:focus{
     outline:none;
 }
 select option{
-    background-color: var(--waiting-bg-color);
+    background-color: var(--background);
     font-size: 4vw;
     font-family: 'Advent Pro', sans-serif;
     font-weight: 700;

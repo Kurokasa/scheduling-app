@@ -16,7 +16,7 @@
     </div>
     <div *ngIf="group.id" class="header">
         <div class="lnk-container" style="padding: 1vw;">
-            <i style="font-size: 3vw; color: var(--waiting-brd-color);" class="pi pi-copy" (click)="copyLink(grpLink.innerHTML)"></i>
+            <i style="font-size: 3vw; color: var(--border);" class="pi pi-copy" (click)="copyLink(grpLink.innerHTML)"></i>
             <div class="vl"></div>
             <a #grpLink style="overflow: hidden; align-self: center; font-size: 3vw;">{{ joinLink }}</a>
         </div>
@@ -26,7 +26,7 @@
     </div>  
         <div>
             <div *ngFor="let schedule of group.schedules; let i = index">
-            <div style="border-bottom: 1px solid var(--waiting-brd-color); margin: 0 2vw "></div>
+            <div style="border-bottom: 1px solid var(--border); margin: 0 2vw "></div>
             <div class="schedule">
                 <p-calendar #calendar [id]="'calendar'+i" [hideOnDateTimeSelect]="false" [showTime]="true" class="calendar" [ngModel]="schedule.startDate" [touchUI]="true" [readonlyInput]="true">
                     <ng-template pTemplate="footer">
@@ -54,8 +54,8 @@
             </div>            
         </div>
         <div *ngIf="isAdmin" style="display: flex; flex-direction: column;">
-            <div style="border-bottom: 1px solid var(--waiting-brd-color); margin: 0 2vw;"></div>
-            <button style="height: 5vw; align-self: center; width: 40%; margin: 1vw;background-color: var(--accepted-brd-color);" (click)="newSchedule()">Add Schedule</button>
+            <div style="border-bottom: 1px solid var(--border); margin: 0 2vw;"></div>
+            <button style="height: 5vw; align-self: center; width: 40%; margin: 1vw;background-color: var(--accepted);" (click)="newSchedule()">Add Schedule</button>
         </div>
     </div>  
 </div>

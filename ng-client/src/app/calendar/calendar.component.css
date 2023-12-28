@@ -8,12 +8,12 @@
     justify-content: center;
 }
 .waiting{
-    border-color: var(--waiting-brd-color) !important;
+    border-color: var(--border) !important;
     border: 1.5px solid;
     border-radius: 100%;
 }
 .accepted{
-    border-color: var(--accepted-brd-color) !important;
+    border-color: var(--accepted) !important;
     border: 1.5px solid;
     border-radius: 100%;
 }

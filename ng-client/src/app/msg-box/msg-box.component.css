@@ -22,8 +22,8 @@
     border: solid;
     border-width: 0.5vw;
     border-radius: 2vw;
-    border-color: var(--waiting-brd-color);
-    background-color: var(--waiting-bg-color);
+    border-color: var(--border);
+    background-color: var(--background);
 
     padding: 2.5vw;
 }

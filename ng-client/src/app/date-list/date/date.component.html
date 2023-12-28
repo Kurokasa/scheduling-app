@@ -10,8 +10,8 @@
             <span *ngFor="let member of meeting.members" [ngClass]="member.status">{{ member.name }}</span>
         </div>
         <div class="btn-container">
-            <i *ngIf="(meeting.members[0].status === 'waiting' && meeting.state != 'declined') || meeting.members[0].status === 'declined'" class="pi pi-check" style="background-color: var(--accepted-brd-color)" (click)="accept()"></i>
-            <i *ngIf="meeting.members[0].status === 'waiting' || meeting.members[0].status === 'accepted'" class="pi pi-times" style="background-color: var(--declined-brd-color)" (click)="decline()"></i>
+            <i *ngIf="(meeting.members[0].status === 'waiting' && meeting.state != 'declined') || meeting.members[0].status === 'declined'" class="pi pi-check" style="background-color: var(--accepted)" (click)="accept()"></i>
+            <i *ngIf="meeting.members[0].status === 'waiting' || meeting.members[0].status === 'accepted'" class="pi pi-times" style="background-color: var(--declined)" (click)="decline()"></i>
             <i *ngIf="meeting.state === 'declined'" class="pi pi-calendar-plus" [routerLink]="['/reschedule', dataService.getMeetingID(meeting)]" style="background-color: rgb(137, 116, 255)" (click)="onReschedule()" ></i>
         </div>
     </div>
@@ -25,8 +25,8 @@
             <h3 class="grp-name">{{ meeting.grpName }}</h3>
         </div>
         <div class="btn-container">
-            <button *ngIf="(meeting.members[0].status === 'waiting' && meeting.state != 'declined') || meeting.members[0].status === 'declined'" (click)="accept()" style="background-color: var(--accepted-brd-color);">Accept</button>
-            <button *ngIf="meeting.members[0].status === 'waiting' || meeting.members[0].status === 'accepted'" (click)="decline()" style="background-color: var(--declined-brd-color);">Decline</button>
+            <button *ngIf="(meeting.members[0].status === 'waiting' && meeting.state != 'declined') || meeting.members[0].status === 'declined'" (click)="accept()" style="background-color: var(--accepted);">Accept</button>
+            <button *ngIf="meeting.members[0].status === 'waiting' || meeting.members[0].status === 'accepted'" (click)="decline()" style="background-color: var(--declined);">Decline</button>
             <i *ngIf="meeting.state === 'declined'" class="pi pi-calendar-plus" [routerLink]="['/reschedule', dataService.getMeetingID(meeting)]" style="background-color: rgb(137, 116, 255)" (click)="onReschedule()" ></i>
         </div>
         <div class="mbr-container">

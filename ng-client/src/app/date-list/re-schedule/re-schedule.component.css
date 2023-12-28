@@ -95,14 +95,14 @@ i{
     margin-top: 2.5vw;
     padding: 2vw;
 
-    background-color: var(--accepted-brd-color);
+    background-color: var(--accepted);
 }
 .accepted{
-    border-color: var(--accepted-brd-color);
+    border-color: var(--accepted);
     /* background-color: var(--accepted-bg-color); */
 }
 .declined, .searching{
-    border-color: var(--declined-brd-color);
+    border-color: var(--declined);
     /* background-color: var(--declined-bg-color); */
 }
 .add-container{

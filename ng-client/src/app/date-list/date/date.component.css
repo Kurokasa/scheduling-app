@@ -67,17 +67,17 @@ i{
     border-radius: 20%;
 }
 .accepted{
-    border-color: var(--accepted-brd-color);
+    border-color: var(--accepted);
 }
 .declined, .searching{
-    border-color: var(--declined-brd-color);
+    border-color: var(--declined);
 } */
 
 .container{
     width: 100%;
     display: flex;
 
-    background-color: var(--waiting-bg-color);
+    background-color: var(--background);
     border-radius: 2vw;
 }
 .statusbar{
@@ -86,13 +86,13 @@ i{
     max-width: 3vw;
 
     border-radius: 2vw 0 0 2vw;
-    background-color: var(--waiting-brd-color);
+    background-color: var(--border);
 }
 .statusbar.accepted{
-    background-color: var(--accepted-brd-color);
+    background-color: var(--accepted);
 }
 .statusbar.declined{
-    background-color: var(--declined-brd-color);
+    background-color: var(--declined);
 }
 .contant-container{
     width: 100%;
@@ -173,7 +173,7 @@ i{
     display: flex;
     padding: 1vw;
 
-    border-top: solid 1px var(--main-acc-grey);
+    border-top: solid 1px var(--border);
 }
 .mbr-container span{
     height: fit-content;
@@ -192,8 +192,8 @@ i{
     padding: 0.5vw 1vw;
 }
 .mbr-container .accepted{
-    border-color: var(--accepted-brd-color);
+    border-color: var(--accepted);
 }
 .mbr-container .declined{
-    border-color: var(--declined-brd-color);
+    border-color: var(--declined);
 }
