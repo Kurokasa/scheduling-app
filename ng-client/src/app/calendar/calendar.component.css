@@ -9,11 +9,11 @@
 }
 .waiting{
     border-color: var(--border) !important;
-    border: 1.5px solid;
+    border: 1px solid;
     border-radius: 100%;
 }
 .accepted{
     border-color: var(--accepted) !important;
-    border: 1.5px solid;
+    border: 1px solid;
     border-radius: 100%;
 }

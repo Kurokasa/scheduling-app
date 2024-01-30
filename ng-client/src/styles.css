@@ -31,7 +31,6 @@ body{
 
 .p-datepicker-inline{
     background-color: #444444;
-    width: 90vw;
     color: var(--main-font-color);
 }
 .p-datepicker-group-container{
