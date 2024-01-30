@@ -1,14 +1,20 @@
 .container{
-    height: 100vh;
+    height: 100dvh;
     width: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
     background-color: #444444;
 }
+
 .contant{
-    padding-top: 2.5vw;
+    padding-top: 0.5rem;
     width: 95%;
-    height: 92vh;
-    position: relative;
-    left: 2.5%;
+    max-width: 450px;
+    height: 92%;
 
     overflow-y: scroll;
     overflow-x: hidden;
@@ -21,9 +27,7 @@
     display: none;
 }
 .footer{
-    position: fixed;
-    bottom: 0;
     width: 95%;
-    height: 8vh;
-    left: 2.5%;
+    max-width: 450px;
+    height: 8%;
 }
