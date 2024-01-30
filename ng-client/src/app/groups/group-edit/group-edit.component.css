@@ -1,7 +1,7 @@
 .container{
     width: 100%;
 
-    border-radius: 2vw;
+    border-radius: 0.5rem;
     background-color: var(--background);
 }
 .header{
@@ -20,19 +20,19 @@ img{
     object-fit: cover;
     border-radius: 10%;
 
-    padding: 1vw;
+    padding: 0.5rem;
 }
 .grp-container{
     display: flex;
     flex-direction: column;
 
-    margin: 0 2vw;
+    margin: 0 0.5rem;
     width: 66%;
 }
 .name{
     color: var(--main-font-color);
-    margin: 1vw 0;
-    font-size: 5vw;
+    margin: 0.25rem 0;
+    font-size: 1.5rem;
     font-family: 'Advent Pro', sans-serif;
     font-weight: 700;
     width: 100%;
@@ -45,8 +45,8 @@ img{
 }
 .imgLink{
     color: var(--main-font-color);
-    margin-bottom: 1vw;
-    font-size: 4vw;
+    margin-bottom: 0.25rem;
+    font-size: 1rem;
     font-family: 'Advent Pro', sans-serif;
     font-weight: 700;
     width: 100%;
@@ -59,12 +59,13 @@ img{
 }
 .edit-btn{
     width: 25%;
-    margin-left: 2vw;
+    margin-left: 0.5rem;
     align-self: center;
     background-color: var(--action);
+    font-size: 0.9rem;
 }
 .mbr-container{
-    margin-bottom: 1vw;
+    margin-bottom: 0.25rem;
     display: flex;
     flex-wrap: wrap;
 }
@@ -79,21 +80,21 @@ img{
     border: solid;
     border-color: var(--main-acc-grey);
     border-width: 1px;
-    border-radius: 1vw;
+    border-radius: 0.25rem;
 
-    margin: 0.5vw;
-    padding: 0.5vw 1vw;
+    margin: 0.1rem;
+    padding: 0.1rem 0.25rem;
 }
 .vl {
   border-left: 1px solid var(--border);
   height: 1rem;
-  margin: 0 1vw;
+  margin: 0 0.25rem;
 }
 .lnk-container{
     max-width: 65%;
     border: solid;
     border-width: 1px;
-    border-radius: 1.25vw;
+    border-radius: 0.25rem;
 
     display: flex;
     justify-content: space-between;
@@ -101,7 +102,7 @@ img{
     border-color: var(--border);
     background-color: var(--background);
 
-    margin: 2vw;
+    margin: 0.5rem;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -113,32 +114,31 @@ img{
     align-items: center;
 }
 button{
-    height: 75%;
-    width: 60%;
 
     border: none;
-    border-radius: 1.25vw;
+    border-radius: 0.25rem;
+    padding: 0.25rem 0.5rem;
     background-color: var(--declined);
 
     color: var(--main-font-color);
     font-family: var(--font-off);
-    font-size: 4vw;
+    font-size: 0.9rem;
 }
 .admin{
     border-color: #ff8000;
 }
 .schedule{
-    width: 100%;
     display: grid; 
     grid-template-columns: 27% 18% 25% 30%;
     flex-direction: row;
     align-items: center;
 }
 .schedule button{
-    height: 5vw;
+    padding: 0.1rem 0.5rem;
+    font-size: 0.75rem;
 }
 .schedule span{
-    margin: 1vw 0 1vw 2vw;
+    margin: 0.25rem 0 0.25rem 0.5rem;
 }
 .calendar{
     grid-column-start: 1;
@@ -148,7 +148,7 @@ button{
 select{
     width: 100%;
     background-color: transparent;
-    font-size: 4vw;
+    font-size: 1rem;
     font-family: 'Advent Pro', sans-serif;
     font-weight: 700;
     color: var(--main-font-color);
@@ -158,15 +158,15 @@ select:focus{
 }
 select option{
     background-color: var(--background);
-    font-size: 4vw;
+    font-size: 1rem;
     font-family: 'Advent Pro', sans-serif;
     font-weight: 700;
     color: var(--main-font-color);
 }
 .scheduletxt{
     color: var(--main-font-color);
-    margin-bottom: 1vw;
-    font-size: 4vw;
+    margin-bottom: 0.25rem;
+    font-size: 1rem;
     font-family: 'Advent Pro', sans-serif;
     font-weight: 700;
     width: 100%;

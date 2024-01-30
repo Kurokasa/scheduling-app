@@ -15,10 +15,10 @@
         </div>
     </div>
     <div *ngIf="group.id" class="header">
-        <div class="lnk-container" style="padding: 1vw;">
-            <i style="font-size: 3vw; color: var(--border);" class="pi pi-copy" (click)="copyLink(grpLink.innerHTML)"></i>
+        <div class="lnk-container" style="padding: 0.25rem;">
+            <i style="font-size: 1rem; color: var(--border);" class="pi pi-copy" (click)="copyLink(grpLink.innerHTML)"></i>
             <div class="vl"></div>
-            <a #grpLink style="overflow: hidden; align-self: center; font-size: 3vw;">{{ joinLink }}</a>
+            <a #grpLink style="overflow: hidden; align-self: center; font-size: 0.75rem;">{{ joinLink }}</a>
         </div>
         <div class="container-btn">
             <button (click)="leaveGroup()" routerLink="/groups" [innerText]="isAdmin ? 'Delete' : 'Leave'"></button>
@@ -26,7 +26,7 @@
     </div>  
         <div>
             <div *ngFor="let schedule of group.schedules; let i = index">
-            <div style="border-bottom: 1px solid var(--border); margin: 0 2vw "></div>
+            <div style="border-bottom: 1px solid var(--border); margin: 0 0.5rem "></div>
             <div class="schedule">
                 <p-calendar #calendar [id]="'calendar'+i" [hideOnDateTimeSelect]="false" [showTime]="true" class="calendar" [ngModel]="schedule.startDate" [touchUI]="true" [readonlyInput]="true">
                     <ng-template pTemplate="footer">
@@ -40,7 +40,7 @@
                 <span style="grid-column: 1; grid-row: 1" class="scheduletxt">{{ schedule.startDate | date:'EEEE' }}</span>
                 <span style="grid-column: 2; grid-row: 1" class="scheduletxt">{{ schedule.startDate | date:'HH:mm' }}</span>
                 <span *ngIf="!isAdmin" style="grid-column: 3; grid-row: 1" class="scheduletxt">{{ schedule.repeat }}</span>
-                <div *ngIf="isAdmin" style="grid-column: 3; grid-row: 1; margin-right: auto; width: 100%; padding: 0.5vw 0vw;">
+                <div *ngIf="isAdmin" style="grid-column: 3; grid-row: 1; margin-right: auto; width: 100%; padding: 0.1rem 0;">
                     <select [(ngModel)]="schedule.repeat">
                         <option value="none">None</option>
                         <option value="weekly">Weekly</option>
@@ -54,8 +54,8 @@
             </div>            
         </div>
         <div *ngIf="isAdmin" style="display: flex; flex-direction: column;">
-            <div style="border-bottom: 1px solid var(--border); margin: 0 2vw;"></div>
-            <button style="height: 5vw; align-self: center; width: 40%; margin: 1vw;background-color: var(--accepted);" (click)="newSchedule()">Add Schedule</button>
+            <div style="border-bottom: 1px solid var(--border); margin: 0 0.5rem;"></div>
+            <button style="align-self: center; width: 40%; margin: 0.25rem;background-color: var(--accepted);" (click)="newSchedule()">Add Schedule</button>
         </div>
     </div>  
 </div>
